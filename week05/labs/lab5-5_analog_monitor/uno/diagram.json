@@ -1,0 +1,195 @@
+{
+  "version": 1,
+  "author": "2026-2 Embedded Basic",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "wokwi-arduino-uno",
+      "id": "uno",
+      "top": 0,
+      "left": 0,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led1",
+      "top": -260,
+      "left": 400,
+      "attrs": {
+        "color": "red"
+      }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r1",
+      "top": -190,
+      "left": 380,
+      "rotate": 90,
+      "attrs": {
+        "value": "330"
+      }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led2",
+      "top": -260,
+      "left": 495,
+      "attrs": {
+        "color": "green"
+      }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r2",
+      "top": -190,
+      "left": 475,
+      "rotate": 90,
+      "attrs": {
+        "value": "330"
+      }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led3",
+      "top": -260,
+      "left": 590,
+      "attrs": {
+        "color": "blue"
+      }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r3",
+      "top": -190,
+      "left": 570,
+      "rotate": 90,
+      "attrs": {
+        "value": "330"
+      }
+    },
+    {
+      "type": "wokwi-buzzer",
+      "id": "bz1",
+      "top": -260,
+      "left": 665,
+      "attrs": {
+        "volume": "0.1"
+      }
+    },
+    {
+      "type": "wokwi-potentiometer",
+      "id": "pot1",
+      "top": 260,
+      "left": 380,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btn1",
+      "top": 260,
+      "left": 490,
+      "attrs": {
+        "color": "green"
+      }
+    }
+  ],
+  "connections": [
+    [
+      "uno:9",
+      "r1:2",
+      "green",
+      []
+    ],
+    [
+      "r1:1",
+      "led1:A",
+      "green",
+      []
+    ],
+    [
+      "led1:C",
+      "uno:GND.2",
+      "black",
+      []
+    ],
+    [
+      "uno:6",
+      "r2:2",
+      "green",
+      []
+    ],
+    [
+      "r2:1",
+      "led2:A",
+      "green",
+      []
+    ],
+    [
+      "led2:C",
+      "uno:GND.3",
+      "black",
+      []
+    ],
+    [
+      "uno:5",
+      "r3:2",
+      "green",
+      []
+    ],
+    [
+      "r3:1",
+      "led3:A",
+      "green",
+      []
+    ],
+    [
+      "led3:C",
+      "uno:GND.1",
+      "black",
+      []
+    ],
+    [
+      "bz1:2",
+      "uno:11",
+      "violet",
+      []
+    ],
+    [
+      "bz1:1",
+      "uno:GND.2",
+      "black",
+      []
+    ],
+    [
+      "pot1:VCC",
+      "uno:5V",
+      "red",
+      []
+    ],
+    [
+      "pot1:GND",
+      "uno:GND.3",
+      "black",
+      []
+    ],
+    [
+      "pot1:SIG",
+      "uno:A0",
+      "orange",
+      []
+    ],
+    [
+      "btn1:1.l",
+      "uno:2",
+      "blue",
+      []
+    ],
+    [
+      "btn1:2.l",
+      "uno:GND.1",
+      "black",
+      []
+    ]
+  ],
+  "dependencies": {}
+}
