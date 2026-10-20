@@ -63,6 +63,7 @@ void handleButton(uint8_t index, uint32_t now) {
       break;
     case 2:
       speedIndex = (speedIndex + 1) % 3;
+      lastStep = now;   // 주기 변경 시 기준 시각 재설정(밀린 스텝이 연속 실행되는 현상 방지)
       printState("C SPEED");
       break;
     case 3:

@@ -14,6 +14,12 @@
 |원형 12LED DIN|D7 → 330Ω → DIN|GPIO22 → 74AHCT125 → 330Ω → DIN|별도 +5V, GND|
 |버튼 A/B/C|D2/D3/D4|GPIO18/19/21|각 버튼 반대쪽 GND|
 **기존 PCINT/GPIO 인터럽트 입력 배선은 그대로 유지한다.** 모든 GND는 공통이어야 하며 데이터 출력 DOUT과 DIN을 혼동하지 않는다.
+## 연결도
+![UNO WS2812 연결도](../images/uno_ws2812_8bar_12ring_ko.svg)
+![ESP32 WS2812 연결도](../images/esp32_ws2812_8bar_12ring_ko.svg)
+
+74AHCT125 핀: 1A=2번, 1Y=3번, 2A=5번, 2Y=6번, 1OE=1번·2OE=4번(GND), VCC=14번(+5V), GND=7번. 사용하지 않는 3·4채널 입력(9·12번)과 OE(10·13번)는 GND에 연결한다.
+
 ## 동작
 - 버튼 A: 레벨 1 증가(0→12→0). 8LED 바는 8칸이 상한, 12LED 링은 12칸이 상한.
 - 버튼 B: 레벨 0 초기화.

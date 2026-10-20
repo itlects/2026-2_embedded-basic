@@ -42,9 +42,12 @@ void applyButton(byte i, unsigned long now) {
     if (!running) { noTone(buzzer); toneOn=false; }
     printStatus("A RUN/PAUSE");
   } else if (i==1) {
-    mode = (mode+1)%3; printStatus("B MODE");
+    mode = (mode+1)%3;
+    printStatus("B MODE");
   } else if (i==2) {
-    speed = (speed+1)%3; printStatus("C SPEED");
+    speed = (speed+1)%3;
+    lastStep = now;   // 주기 변경 시 기준 시각 재설정(밀린 스텝이 연속 실행되는 현상 방지)
+    printStatus("C SPEED");
   } else {
     running=false; mode=0; speed=1; pos=0;
     noTone(buzzer); toneOn=false;
