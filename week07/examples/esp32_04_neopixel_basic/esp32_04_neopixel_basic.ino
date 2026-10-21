@@ -1,7 +1,8 @@
 // Week 07 - 예제 4: NeoPixel(WS2812) 기본 출력 (ESP32 DevKit)
 // 부품: WS2812 일자형 8LED(DIN←GPIO23), 원형 12LED(DIN←GPIO22), 74AHCT125 레벨 변환,
 //       외부 5V 2A 전원, 330Ω 2개, 1000µF 콘덴서
-// 라이브러리: Adafruit NeoPixel. 시리얼 115200bps.
+// 라이브러리: Adafruit NeoPixel — Arduino IDE 라이브러리 매니저(Ctrl+Shift+I)에서 "Adafruit NeoPixel"(제작자 Adafruit) 설치
+//            자세한 방법: examples/NEOPIXEL_LIBRARY_INSTALL.md
 //
 // 동작: 8LED 바는 0→8칸까지 초록색으로 차오른 뒤 비워지고(게이지),
 //       12LED 링은 파란 점 하나가 시계 방향으로 회전한다.

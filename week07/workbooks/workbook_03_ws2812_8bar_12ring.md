@@ -9,7 +9,7 @@
 - 8LED 일자형 WS2812 계열 RGB LED 모듈: DIN, +5V, GND (연결 전 보드 실크를 반드시 확인).
 - 12LED 원형 WS2812 계열 RGB LED 모듈: DIN, +5V, GND. 데이터 입력 DIN과 출력 DOUT을 혼동하지 말 것.
 - 개별 LED는 RGB 24비트 색상 데이터를 사용하지만 모듈 이름의 '8비트/12비트'는 여기서 LED 8개·12개를 뜻함. WS2812/WS2812B 칩 변형 확인.
-- Adafruit NeoPixel 라이브러리 설치: Arduino IDE > 라이브러리 관리자 > 'Adafruit NeoPixel' 검색 > 설치.
+- Adafruit NeoPixel 라이브러리 설치: Arduino IDE 2.x 왼쪽 책 아이콘(라이브러리 매니저, `Ctrl+Shift+I`) → 'Adafruit NeoPixel' 검색 → 제작자 Adafruit 항목 INSTALL. 단계별 설명과 오류 해결은 [NEOPIXEL_LIBRARY_INSTALL.md](../examples/NEOPIXEL_LIBRARY_INSTALL.md) 참고.
 ## 전원 안전
 최대 흰색 밝기에서 LED당 최대 약 60mA를 보수적으로 산정하면 합계 20개는 최대 약 1.2A(+보드 소비 전류 별도)까지 가능. **USB 5V/MCU 5V 핀만으로 전체 20개를 구동하지 말 것.** 5V 2A 이상 안정된 별도 전원 권장, 실제 전원/전선 정격 확인. 5V 전원 +를 두 모듈 +5V, -를 두 모듈 GND에 연결하고 MCU GND에도 공통 접지. 보드가 별도 USB로 연결된 상태에서 외부 5V를 UNO 5V 핀 또는 ESP32 5V 핀으로 역공급하지 말 것.
 전원 입구에 470~1000µF/6.3V 이상 전해콘덴서(극성 확인), 각 DIN 바로 앞 330~470Ω 직렬저항 권장. **ESP32의 3.3V 데이터는 5V 구동 WS2812에서 신뢰성이 낮으므로 74AHCT125/74HCT245 같은 5V 구동 레벨 시프터 사용 권장** (양 채널 각각). MCU 전원 OFF 상태에서 LED 데이터가 인가되지 않도록 전원 순서 준수.
