@@ -12,6 +12,11 @@ UNO 또는 ESP32 DevKit 1개, 5mm LED 5개, 220~330Ω 저항 5개, 푸시버튼 
 |버튼 D 초기화|D5 / PCINT21|GPIO22|신호→버튼→GND|
 |LED1~LED5|D8,D9,D10,D11,D12|GPIO13,14,25,26,27|각 핀→220~330Ω→LED 긴 다리(+), 짧은 다리(-)→GND|
 |수동 피에조 부저|D6|GPIO23|출력 핀→저전류 수동 피에조(+), (-)→GND|
+### 브레드보드 배선도 (이 그림대로 꽂는다)
+![워크북4 UNO 브레드보드](../images/workbook04_uno_breadboard_ko.svg)
+![워크북4 ESP32 브레드보드](../images/workbook04_esp32_breadboard_ko.svg)
+
+### 회로도
 ![UNO 워크북4 연결도](../images/workbook04_uno_schematic_ko.svg)
 ![ESP32 워크북4 연결도](../images/workbook04_esp32_schematic_ko.svg)
 

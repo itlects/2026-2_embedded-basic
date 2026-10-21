@@ -6,6 +6,11 @@
 Arduino UNO 또는 ESP32 DevKit, 택트 버튼 1개, 브레드보드, 점퍼선, USB.
 
 ## 연결 (예제 1만 버튼 필요, 예제 2·2B는 USB만 연결)
+### 브레드보드 배선도 (이 그림대로 꽂는다)
+![워크북1 UNO 브레드보드](../images/workbook01_uno_breadboard_ko.svg)
+![워크북1 ESP32 브레드보드](../images/workbook01_esp32_breadboard_ko.svg)
+
+### 회로도
 ![UNO 버튼 1개 연결도](../images/workbook01_uno_button_interrupt_ko.svg)
 ![ESP32 버튼 1개 연결도](../images/workbook01_esp32_button_interrupt_ko.svg)
 

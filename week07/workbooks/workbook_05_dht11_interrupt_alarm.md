@@ -22,6 +22,10 @@ DHT11은 약 1Hz 이하 수준의 저속 센서이므로 이 예제는 2500ms �
 
 전류 소모가 큰 자기식 부저·모듈은 GPIO 직접 구동하지 않고 트랜지스터 드라이버를 사용한다. 모든 부품의 GND는 공통이어야 한다.
 
+## 브레드보드 배선도 (이 그림대로 꽂는다)
+![워크북5 UNO 브레드보드](../images/workbook05_uno_breadboard_ko.svg)
+![워크북5 ESP32 브레드보드](../images/workbook05_esp32_breadboard_ko.svg)
+
 ## 한글 연결 개략도
 ![UNO DHT11·버튼·LED·부저 연결도](../images/workbook05_uno_dht11_alarm_ko.svg)
 ![ESP32 DHT11·버튼·LED·부저 연결도](../images/workbook05_esp32_dht11_alarm_ko.svg)

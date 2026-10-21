@@ -13,6 +13,9 @@ UNO 또는 ESP32 DevKit, 택트 버튼 3개, 브레드보드, 점퍼선(4색 권
 |C 일시정지/재개|D4 (PCINT20)|GPIO21|핀 → 버튼 → GND|
 
 ### 브레드보드 배선도 (이 그림대로 꽂는다)
+![워크북2 UNO 브레드보드](../images/workbook02_uno_breadboard_ko.svg)
+![워크북2 ESP32 브레드보드](../images/workbook02_esp32_breadboard_ko.svg)
+
 ![UNO 3버튼 브레드보드 배선도](../images/uno_3buttons_breadboard_ko.svg)
 ![ESP32 3버튼 브레드보드 배선도](../images/esp32_3buttons_breadboard_ko.svg)
 

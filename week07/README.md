@@ -6,25 +6,26 @@
 - 카운터 응용: 버튼 3개를 인터럽트 입력으로 설정해 카운터 증가/초기화/일시정지 구현
 
 ## 학습 순서
-| 단계 | 자료 | 핵심 |
+### ① 예제학습 (기본 — 수업 중 함께 따라 하기)
+| 예제 | 자료 | 핵심 |
 |---|---|---|
 | 이론 | [theory/arduino_interrupt_function_guide.md](theory/arduino_interrupt_function_guide.md), `images/theory_*` | 폴링 vs 인터럽트, 벡터 테이블, CPU 처리 절차, 디바운스, 타이머 인터럽트, 이벤트 기반 구조 |
-| 예제 1 | `examples/*_01_external_interrupt` | 버튼 1개 하강 에지 → ISR 플래그 → loop 출력 |
-| 예제 2 | `examples/*_02_clock` | `millis()` 폴링 1초 시계 (비차단) |
+| 예제 1 | `examples/*_01_external_interrupt`, `images/example01_*` | 버튼 1개 하강 에지 → ISR 플래그 → loop 출력 |
+| 예제 2 | `examples/*_02_clock`, `images/example02_*` | `millis()` 폴링 1초 시계 (비차단) |
 | 예제 2B | `examples/*_02b_timer_interrupt_clock` | **타이머 인터럽트** 1초 시계 (UNO Timer1 CTC / ESP32 HW 타이머) |
-| 예제 3 | `labs/*_03_*` | 3버튼 인터럽트 카운터 + 타이머 시계 (워크북 2에서 확장 실습) |
-| 예제 4 | `examples/*_04_neopixel_basic` | NeoPixel(WS2812) 8LED 게이지 + 12LED 회전 기본 출력 |
-| 실습 3 | `labs/*_03_*` + [워크북 2](workbooks/workbook_02_three_button_counter.md) | 타이머 인터럽트 시계 + 3버튼 인터럽트 카운터(증가/초기화/일시정지) |
-| 확장 1 | `labs/*_04_*` + 워크북 3 | WS2812 8LED+12LED 인터럽트 표시 |
-| 확장 2 | `labs/*_05_*` + 워크북 4 | 4버튼·LED 5개·부저 시퀀서 |
-| 확장 3 | `labs/*_06_*` + 워크북 5 | DHT11 습도 감시·인터럽트 경보 |
+| 예제 3 | `labs/*_03_*`, `images/*_3buttons_breadboard_ko.svg` | 3버튼 인터럽트 카운터(증가/초기화/일시정지) + 타이머 시계 |
+| 예제 4 | `examples/*_04_neopixel_basic`, `images/example04_*` | NeoPixel(WS2812) 8LED 게이지 + 12LED 회전 기본 출력 |
 
-### 워크북 순서
-1. [워크북 1 — 인터럽트와 시계 만들기](workbooks/workbook_01_interrupt_clock.md)
-2. [워크북 2 — 시계와 3버튼 인터럽트 카운터](workbooks/workbook_02_three_button_counter.md)
-3. [워크북 3 — WS2812 8LED·12LED 확장](workbooks/workbook_03_ws2812_8bar_12ring.md)
-4. [워크북 4 — 4버튼·LED 5개·부저 시퀀서](workbooks/workbook_04_advanced_interrupt_sequencer.md)
-5. [워크북 5 — DHT11 습도 감시·인터럽트 경보](workbooks/workbook_05_dht11_interrupt_alarm.md)
+### ② 심화 학습 — 워크북 (예제학습을 마친 뒤 스스로 수행)
+워크북 번호는 예제 번호와 별개이다.
+
+| 워크북 | 선행 예제 | 코드 | 핵심 |
+|---|---|---|---|
+| [워크북 1 — 인터럽트와 시계 만들기](workbooks/workbook_01_interrupt_clock.md) | 예제 1, 2·2B | 예제 코드 활용 | 바운스 측정, 두 시계 비교 |
+| [워크북 2 — 시계와 3버튼 인터럽트 카운터](workbooks/workbook_02_three_button_counter.md) | 예제 3 | 예제 3 코드 + 도전 과제 | 기능 검증, 한계 측정 |
+| [워크북 3 — WS2812 8LED·12LED 인터럽트 표시](workbooks/workbook_03_ws2812_8bar_12ring.md) | 예제 3, 4 | `labs/*_04_*` | 버튼 인터럽트 + NeoPixel |
+| [워크북 4 — 4버튼·LED 5개·부저 시퀀서](workbooks/workbook_04_advanced_interrupt_sequencer.md) | 예제 3 | `labs/*_05_*` | 상태기계, 비차단 출력 |
+| [워크북 5 — DHT11 습도 감시·인터럽트 경보](workbooks/workbook_05_dht11_interrupt_alarm.md) | 예제 3, 워크북 4 | `labs/*_06_*` | 센서 주기 측정 + 인터럽트 |
 
 모든 워크북 끝에 학생이 채우는 **작업 확인 결과 리포트** 표(기본 정보·결선 확인·기능 확인·분석·문제 해결·제출물·교수자 확인)가 있다.
 
