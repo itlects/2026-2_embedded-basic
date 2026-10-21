@@ -13,7 +13,18 @@
 | 예제 2 | `examples/*_02_clock` | `millis()` 폴링 1초 시계 (비차단) |
 | 예제 2B | `examples/*_02b_timer_interrupt_clock` | **타이머 인터럽트** 1초 시계 (UNO Timer1 CTC / ESP32 HW 타이머) |
 | 실습 3 | `labs/*_03_*` + [워크북 2](workbooks/workbook_02_three_button_counter.md) | 타이머 인터럽트 시계 + 3버튼 인터럽트 카운터(증가/초기화/일시정지) |
-| 확장 | `labs/*_04_*`, `labs/*_05_*` + 워크북 3·4 | WS2812 8LED+12LED, 4버튼·LED 5개·부저 시퀀서 |
+| 확장 1 | `labs/*_04_*` + 워크북 3 | WS2812 8LED+12LED 인터럽트 표시 |
+| 확장 2 | `labs/*_05_*` + 워크북 4 | 4버튼·LED 5개·부저 시퀀서 |
+| 확장 3 | `labs/*_06_*` + 워크북 5 | DHT11 습도 감시·인터럽트 경보 |
+
+### 워크북 순서
+1. [워크북 1 — 인터럽트와 시계 만들기](workbooks/workbook_01_interrupt_clock.md)
+2. [워크북 2 — 시계와 3버튼 인터럽트 카운터](workbooks/workbook_02_three_button_counter.md)
+3. [워크북 3 — WS2812 8LED·12LED 확장](workbooks/workbook_03_ws2812_8bar_12ring.md)
+4. [워크북 4 — 4버튼·LED 5개·부저 시퀀서](workbooks/workbook_04_advanced_interrupt_sequencer.md)
+5. [워크북 5 — DHT11 습도 감시·인터럽트 경보](workbooks/workbook_05_dht11_interrupt_alarm.md)
+
+모든 워크북 끝에 학생이 채우는 **작업 확인 결과 리포트** 표(기본 정보·결선 확인·기능 확인·분석·문제 해결·제출물·교수자 확인)가 있다.
 
 ## 폴더
 - `examples/`: 기본 예제 (외부 인터럽트, millis 시계, 타이머 인터럽트 시계)

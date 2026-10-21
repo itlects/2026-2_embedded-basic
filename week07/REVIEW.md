@@ -20,6 +20,7 @@
 | `labs/uno_03_buttons_pcint` | 개선 | 동작은 정상. 시계를 Timer1 인터럽트로 변경해 '두 인터럽트 소스 + 이벤트 기반 loop' 구조로 정리, 함수 분리·주석 추가 |
 | `labs/esp32_03_buttons_gpio` | 개선 | 위와 동일 (HW 타이머 인터럽트 시계, 코어 3.x/2.x 겸용) |
 | `labs/*_04_ws2812_interrupt` | 정상 | ISR에서 show() 호출 없음, 디바운스·일시정지 정상 |
+| `labs/*_06_dht11_alarm` (워크북 5, 추가분) | 정상 | UNO는 DHT 라이브러리 포함 빌드 성공(9.1KB), ESP32 문법 통과. 습도<임계값 경보, 임계값 20~90% 제한, 센서 오류 시 LED 깜빡임 로직 확인 |
 | `labs/*_05_advanced_sequencer` | 수정 | C(속도) 버튼으로 주기를 줄이면 밀린 스텝이 연속 실행되는 현상(시뮬레이션에서 4ms 간격 2스텝 확인) → 속도 변경 시 `lastStep = now` |
 
 참고: 5번 실습의 B(모드) 직후 position 값이 그대로 유지되는 것은 의도된 동작이다.
@@ -31,11 +32,13 @@
 | `esp32_ws2812_8bar_12ring_ko` | +5V 빨간 선이 74AHCT125 박스를 관통, 우측에 끝이 열린 빨간 선, 모듈 전원 연결 불명확 | 새로 그림: 레벨 변환 IC VCC/GND/OE 결선, +5V·GND 버스, 콘덴서 극성, 교차 표시 |
 | `uno_ws2812_8bar_12ring_ko` | 동일한 전원선 오류(열린 끝 선) | 새로 그림 |
 | `workbook04_esp32_schematic_ko` | LED 라벨이 "LEGPIO18 …"로 깨짐(문자열 치환 오류), 부저 안내 박스에 "D6"(UNO 핀) 표기 | 라벨·핀 수정, LED 극성 기호 추가 |
+| `workbook05_uno/esp32_dht11_alarm_ko` | 버튼 반대 접점·LED 음극이 '→ GND' 글자로만 끝나고 선이 없음, DHT11 VCC/GND·부저·보드 GND 미표시 | 새로 그림: 모든 GND를 공통선으로, DHT11 3선, 4핀 단품용 풀업(점선), 부저 극성 |
 | `workbook04_uno_schematic_ko` | LED·부저 신호선이 버튼 GND선과 교차해 연결된 것처럼 보임 | 교차부에 넘어가기(⌒) 표시 |
 
 원본은 `images/archive_before_fix/`에 보관(삭제하지 않음). 노션에 삽입된 그림은 같은 파일명을 쓰므로 자동으로 수정본이 표시된다.
 
 ### 새로 추가한 그림
+- `example02_usb_only_connection_ko.svg` — 예제 2·2B 연결(USB만)
 - `theory_2_3_avr_vector_table_ko.svg` — ATmega328P 벡터 테이블(이번 주 사용 벡터 강조)
 - `theory_2_5_timer1_ctc_clock_ko.svg` — Timer1 CTC 1초 인터럽트 원리
 - `theory_2_6_event_driven_structure_ko.svg` — 실습 3의 ISR ↔ loop() 이벤트 구조
@@ -47,3 +50,6 @@
 - 워크북 2: 브레드보드 배선도·구조도 삽입, 기능 확인표, 시뮬레이션 출력 예, 도전 과제
 - 워크북 3: 연결도 삽입, 74AHCT125 핀 번호
 - 이론 보충: 벡터 테이블·CPU 처리 절차, 타이머 레지스터 해설, millis vs 타이머 비교, 이벤트 기반 구조, 문제 2개 추가
+
+## 워크북 결과 리포트 표
+워크북 1~5 끝에 '작업 확인 결과 리포트'를 추가했다: 기본 정보 → 결선 확인 → 기능 확인(기대/실제/판정) → 측정·분석 → 문제 해결 기록 → 제출물 → 교수자 확인.
