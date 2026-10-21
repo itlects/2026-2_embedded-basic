@@ -12,6 +12,8 @@
 | 예제 1 | `examples/*_01_external_interrupt` | 버튼 1개 하강 에지 → ISR 플래그 → loop 출력 |
 | 예제 2 | `examples/*_02_clock` | `millis()` 폴링 1초 시계 (비차단) |
 | 예제 2B | `examples/*_02b_timer_interrupt_clock` | **타이머 인터럽트** 1초 시계 (UNO Timer1 CTC / ESP32 HW 타이머) |
+| 예제 3 | `labs/*_03_*` | 3버튼 인터럽트 카운터 + 타이머 시계 (워크북 2에서 확장 실습) |
+| 예제 4 | `examples/*_04_neopixel_basic` | NeoPixel(WS2812) 8LED 게이지 + 12LED 회전 기본 출력 |
 | 실습 3 | `labs/*_03_*` + [워크북 2](workbooks/workbook_02_three_button_counter.md) | 타이머 인터럽트 시계 + 3버튼 인터럽트 카운터(증가/초기화/일시정지) |
 | 확장 1 | `labs/*_04_*` + 워크북 3 | WS2812 8LED+12LED 인터럽트 표시 |
 | 확장 2 | `labs/*_05_*` + 워크북 4 | 4버튼·LED 5개·부저 시퀀서 |
@@ -27,7 +29,7 @@
 모든 워크북 끝에 학생이 채우는 **작업 확인 결과 리포트** 표(기본 정보·결선 확인·기능 확인·분석·문제 해결·제출물·교수자 확인)가 있다.
 
 ## 폴더
-- `examples/`: 기본 예제 (외부 인터럽트, millis 시계, 타이머 인터럽트 시계)
+- `examples/`: 기본 예제 (외부 인터럽트, millis 시계, 타이머 인터럽트 시계, NeoPixel 기본 출력)
 - `labs/`: 통합 실습
 - `workbooks/`: 학생용 단계별 실습 가이드
 - `theory/`: 코드로 이해하는 함수·레지스터 해설

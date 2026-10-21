@@ -1,4 +1,10 @@
 # WS2812 8LED 일자형 · WS2812 12LED 원형: 인터럽트 확장 실습
+## 선행 학습
+먼저 **예제 4 (NeoPixel 기본 출력)** `examples/uno_04_neopixel_basic` 또는 `examples/esp32_04_neopixel_basic`으로 두 모듈이 정상 점등되는지 확인한 뒤, 같은 배선에 버튼 3개만 추가해 이 워크북을 진행한다.
+
+![UNO 예제4 연결도](../images/example04_uno_neopixel_basic_ko.svg)
+![ESP32 예제4 연결도](../images/example04_esp32_neopixel_basic_ko.svg)
+
 ## 부품과 특징
 - 8LED 일자형 WS2812 계열 RGB LED 모듈: DIN, +5V, GND (연결 전 보드 실크를 반드시 확인).
 - 12LED 원형 WS2812 계열 RGB LED 모듈: DIN, +5V, GND. 데이터 입력 DIN과 출력 DOUT을 혼동하지 말 것.
