@@ -375,7 +375,7 @@ def parts_figure():
 
 # ------------------------------------------------------------------ 동작 타이밍
 def timing_figure():
-    W, Hh = 1240, 860
+    W, Hh = 1240, 920
     o = [T(40, 48, "동작 요구사항 — 시간 흐름으로 보기", 30, "bold"),
          T(40, 80, "한 칸 = 250ms. 버튼을 누르는 순간(0칸)에 첫 상태가 바로 나타나고, 이후 250ms마다 다음 칸으로 바뀐다.", 17, fill="#444")]
     cell, x0 = 62, 250
@@ -396,23 +396,43 @@ def timing_figure():
     o += grid(140, "버튼1 · 정방향(FORWARD)", leds_seq([1, 2, 3, 4]), C["red"], "LED1→2→3→4→1… 반복")
     o += grid(320, "버튼2 · 역방향(REVERSE)", leds_seq([4, 3, 2, 1]), C["green"], "LED4→3→2→1→4… 반복")
     o += grid(500, "버튼3 · 동시 점멸(BLINK)", [(f"LED{n}", [1, 0]) for n in (1, 2, 3, 4)], C["blue"], "4개 ON/OFF 반복")
-    # 멜로디
-    y = 690
-    o.append(T(40, y - 14, "버튼4 · 멜로디(MELODY) — 한 번 재생 후 STOP", 19, "bold", C["purple"]))
-    notes = [("도", 262), ("레", 294), ("미", 330), ("파", 349), ("솔", 392)]
-    xx = x0
-    for n, f in notes:
-        w = 250 * 0.25
-        o.append(f'<rect x="{xx}" y="{y+10}" width="{w}" height="36" rx="4" fill="{C["purple"]}"/>')
-        o.append(T(xx + w / 2, y + 34, n, 15, "bold", "white", "middle"))
-        o.append(T(xx + w / 2, y + 64, f"{f}Hz", 11, fill="#666", anchor="middle"))
-        xx += w
-        o.append(f'<rect x="{xx}" y="{y+10}" width="{40*0.25}" height="36" fill="#eceef1"/>')
-        xx += 40 * 0.25
-    o.append(T(xx + 12, y + 34, "→ 소리 정지, 모든 LED 꺼짐, STOP", 15, "bold", "#333"))
-    o.append(T(x0 - 12, y + 34, "부저", 15, anchor="end"))
-    o.append(T(x0, y + 92, "음 길이 200~300ms(그림은 250ms) · 음 사이 무음 30~50ms(그림은 40ms) · 4음 이상이면 곡은 자유", 14, fill="#555"))
-    o.append(T(40, y + 132, "※ 같은 버튼(1~3)을 다시 누르면 그 칸에서 일시정지(불빛 유지) → 한 번 더 누르면 이어서 진행.  다른 버튼은 언제든 즉시 전환.", 15, "bold", "#c62828"))
+    # 멜로디: 버튼4 ON/OFF, 재생 중 LED 패턴 동시 동작
+    y = 700
+    o.append(T(40, y - 14, "버튼4 · 멜로디 ON/OFF — 켜면 반복 재생, 끄면 소리와 LED 모두 꺼짐", 19, "bold", C["purple"]))
+    k_scale = cell / 250.0                       # px per ms (위 표와 같은 축)
+    t_on, t_off = 0, 2500                        # 예시: 0ms에 ON, 2500ms에 OFF
+    for k in range(12):
+        o.append(T(x0 + k * cell + cell / 2, y + 2, f"{k*250}", 11, fill="#888", anchor="middle"))
+    # 부저 줄
+    yy = y + 12
+    o.append(T(x0 - 12, yy + 23, "부저", 15, anchor="end"))
+    o.append(f'<rect x="{x0}" y="{yy}" width="{12*cell}" height="34" rx="4" fill="#eceef1"/>')
+    names = ["도", "레", "미", "파", "솔"]
+    t = t_on; i = 0
+    while t < t_off:
+        w = min(250, t_off - t) * k_scale
+        o.append(f'<rect x="{x0+t*k_scale+1}" y="{yy}" width="{w-2}" height="34" rx="4" fill="{C["purple"]}"/>')
+        if w > 30: o.append(T(x0 + t * k_scale + w / 2, yy + 23, names[i % 5], 14, "bold", "white", "middle"))
+        t += 290; i += 1
+    # LED 줄 (예: 정방향이 실행 중)
+    yy2 = yy + 44
+    o.append(T(x0 - 12, yy2 + 19, "LED(정방향)", 14, anchor="end"))
+    for k in range(12):
+        on = (k * 250) < t_off
+        lab = f"{k % 4 + 1}" if on else ""
+        o.append(f'<rect x="{x0+k*cell+2}" y="{yy2}" width="{cell-4}" height="26" rx="4" fill="{C["red"] if on else "#eceef1"}"/>')
+        if lab: o.append(T(x0 + k * cell + cell / 2, yy2 + 18, "LED" + lab, 12, "bold", "white", "middle"))
+    # ON / OFF 표시
+    xo = x0 + t_off * k_scale
+    o.append(line([(x0, yy - 8), (x0, yy2 + 34)], "#333", 3, "5 4"))
+    o.append(T(x0 + 4, yy2 + 52, "▲ 버튼4 ON", 14, "bold", C["purple"]))
+    o.append(line([(xo, yy - 8), (xo, yy2 + 34)], "#c62828", 3, "5 4"))
+    o.append(T(xo + 4, yy2 + 52, "▲ 버튼4 OFF → 소리 정지 + LED 모두 꺼짐", 14, "bold", "#c62828"))
+    o.append(T(x0 + 12 * cell + 16, yy + 23, "도→레→미→파→솔→도… 반복", 14, fill="#555"))
+    o.append(T(x0 + 12 * cell + 16, yy2 + 19, "멜로디와 함께 계속", 14, fill="#555"))
+    o.append(T(x0, y + 132, "음 길이 200~300ms(그림은 250ms) · 음 사이 무음 30~50ms(그림은 40ms) · 4음 이상이면 곡은 자유", 14, fill="#555"))
+    o.append(T(40, y + 168, "※ 버튼1~3: LED 방식 선택. 같은 버튼을 다시 누르면 일시정지(불빛 유지) → 한 번 더 누르면 이어서 진행. 다른 버튼은 즉시 전환.", 15, "bold", "#c62828"))
+    o.append(T(40, y + 196, "※ 버튼4: 멜로디 ON/OFF. 멜로디가 나오는 동안에도 버튼1~3으로 LED 방식을 바꿀 수 있다.", 15, "bold", "#c62828"))
     return svg(W, Hh, o)
 
 os.makedirs(OUT, exist_ok=True)
