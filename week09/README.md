@@ -1,48 +1,60 @@
-# 9주차 — ESP32-DevKitC V4 GPIO·ADC·논블로킹 복합 실습
+# 9주차 — ESP32-DevKitC V4 GPIO · ADC · PWM 와 복합 이벤트 제어
 
-> 대상: 동서울대학교 IT융합학과 2학년, 3시간 / 8주차 중간고사 이후 첫 주차
-> **보드**: ESP32-DevKitC V4, ESP32-WROOM-32 계열 / Arduino IDE (Espressif Arduino-ESP32 3.x)
+> 대상: 동서울대학교 임베디드프로세서기초, 3시간 / 8주차 중간고사 이후 첫 주차
+> 보드: ESP32-DevKitC V4 (ESP32-WROOM-32) / Arduino IDE + **esp32 by Espressif 3.x**
+> 강의 페이지(Notion): 강의9주차_학습자료 · 검토 내역: [REVIEW.md](REVIEW.md)
 
 ## 학습 목표
-1. ESP32 보드의 GPIO/전원/ADC1 핀과 부팅 관련 주의 핀을 설명한다.
-2. LED 저항 직렬 연결과 INPUT_PULLUP 버튼의 회로를 스스로 설계한다.
-3. ADC1(GPIO34)로 가변저항의 0~3.3V 입력을 읽어 PWM 출력에 반영한다.
-4. millis()를 써서 버튼·센서·부저·LED를 블로킹 없이 함께 제어한다.
+1. DevKitC V4의 구조(USB-UART, EN/BOOT, J2/J3)와 UNO와의 차이를 설명한다.
+2. 3.3V 논리, 공통 GND, 입력 전용·부팅 스트랩·플래시 핀의 안전 수칙을 지킨다.
+3. GPIO 출력/입력(INPUT_PULLUP·디바운스), ADC1(GPIO34), LEDC PWM을 실습한다.
+4. `millis()`로 버튼·ADC·PWM·LED·부저를 블로킹 없이 동시에 처리한다.
 
 ## 3시간 운영
-| 시간 | 내용 | 산출물 |
+| 시간 | 내용 | 자료 | 산출물 |
+|---|---|---|---|
+| 0~20분 | 보드·부품 확인, IDE, 안전 점검 | [이론](theory/01_board_gpio_adc.md) · [워크북0](workbooks/00_preflight.md) · 예제 0 | board_check 로그 |
+| 20~50분 | GPIO 출력 | [워크북1](workbooks/01_led.md) · 예제 1 | 점멸 영상 |
+| 50~80분 | 버튼 입력·디바운스 | [워크북2](workbooks/02_button.md) · 예제 2, 2B | 10회 시험·비교표 |
+| 80~110분 | ADC1 → PWM | [워크북3](workbooks/03_adc_pwm.md) · 예제 3, 3B | 측정표 |
+| 110~165분 | 복합 제어 | [워크북4](workbooks/04_integrated.md) · 예제 4 | 동작 영상 |
+| 165~180분 | 보고서 | [보고서 양식](workbooks/05_report_template.md) | 제출 |
+
+## 핀 할당
+| 기능 | 핀 | 헤더 |
 |---|---|---|
-| 0~20분 | 보드 핀맵/3.3V/Arduino IDE 설정 | 연결 검토표 |
-| 20~50분 | 예제1 LED 출력 | LED 점멸 영상 |
-| 50~80분 | 예제2 버튼 입력/디바운스 | 버튼 로그 |
-| 80~110분 | 예제3 ADC1-가변저항-LED PWM | ADC 로그 |
-| 110~165분 | 워크북4 복합 제어 | 동작 영상/시리얼 캡처 |
-| 165~180분 | 분석/결과보고/정리 | 결과표 |
+| LED1 (PWM) | GPIO25 | J2-9 |
+| LED2 | GPIO26 | J2-10 |
+| 수동 부저 | GPIO27 | J2-11 |
+| 가변저항(ADC1_CH6) | GPIO34 | J2-5 |
+| 버튼 RUN / MODE | GPIO18 / GPIO19 | J3-9 / J3-8 |
+| 3V3 / GND | 3V3 / GND | J2-1 / J2-14, J3-1 |
 
-## 자료
-- [이론과 핀 배치](theory/01_board_gpio_adc.md)
-- [기본 결선 체크리스트](workbooks/00_preflight.md)
-- [워크북1 LED](workbooks/01_led.md) / [회로 그림](images/01_led.svg) / [코드](examples/01_led/01_led.ino)
-- [워크북2 버튼](workbooks/02_button.md) / [회로 그림](images/02_button.svg) / [코드](examples/02_button/02_button.ino)
-- [워크북3 ADC/PWM](workbooks/03_adc_pwm.md) / [회로 그림](images/03_adc_pwm.svg) / [코드](examples/03_adc_pwm/03_adc_pwm.ino)
-- [워크북4 복합제어](workbooks/04_integrated.md) / [회로 그림](images/04_integrated.svg) / [코드](examples/04_integrated/04_integrated.ino)
-- [학생 실습 보고서 양식](workbooks/05_report_template.md)
+## 폴더
+```
+week09/
+├─ theory/01_board_gpio_adc.md      이론(보드·UNO 비교·핀맵·GPIO·ADC·PWM·부품·전원)
+├─ workbooks/00~05                  학생 실습 워크북 + 보고서 양식
+├─ examples/
+│   ├─ 00_board_check               개발환경·보드 확인 (부품 없음)
+│   ├─ 01_led                       GPIO25 LED millis 점멸
+│   ├─ 02_button / 02b_bounce_count 버튼 토글 / 바운싱 관찰
+│   ├─ 03_adc_pwm / 03b_ledc_pwm_steps  ADC→PWM / LEDC 듀티 단계
+│   └─ 04_integrated                버튼2·LED2·가변저항·부저 복합
+└─ images/                          SVG 원본 + PNG (gen_theory.py, gen_examples.py로 재생성)
+    ├─ t1~t9_*                      이론 그림(핀맵, GPIO, 디바운스, ADC, PWM, 흐름, 부품, 전원, UNO 비교)
+    ├─ ex1~ex4_*_schematic/breadboard  예제별 회로도·브레드보드 배선도
+    ├─ ex4_buzzer_npn_driver        부저 트랜지스터 구동(선택)
+    └─ archive_v1/                  1차 생성 연결표 그림(보관)
+```
+그림 재생성: `cd images && python3 gen_theory.py . && python3 gen_examples.py . && for f in *.svg; do rsvg-convert -z 1.5 "$f" -o "${f%.svg}.png"; done`
 
-## 개발환경
-Arduino IDE → 파일 > 환경설정 > 추가 보드 매니저 URLs:
-`https://espressif.github.io/arduino-esp32/package_esp32_index.json`
-→ 보드 매니저에서 **esp32 by Espressif Systems** 설치 → **ESP32 Dev Module** 또는 실제 보드의 ESP32 DevKitC 항목 선택 → 포트 확인 → 모니터 **115200 baud**.
-
-## 정확성·안전
-- ESP32 GPIO는 **3.3V 논리**이다. 5V를 GPIO/ADC 입력에 넣지 않는다.
-- LED는 220~330Ω 저항을 직렬로 넣고, 공통 GND를 완성한다.
-- GPIO34~39는 **입력 전용**이며 내부 pull-up/down이 없다. 워크북에서는 GPIO34에 가변저항의 중심핀만 연결한다.
-- GPIO6~11은 보드 모듈의 SPI 플래시 관련 핀이라 사용하지 않는다. GPIO0/2/5/12/15는 부팅 스트래핑 역할이 있으므로 예제에서 피한다. GPIO1/3은 업로드/시리얼에 사용한다.
-- GPIO25·26 등의 PWM은 ESP32 Arduino 코어의 `analogWrite` API를 이용한다.
-- WS2812는 보통 5V 전원을 사용하며 신호 레벨 매칭/전원용량 검토가 필요하므로 9주차 기본 회로에서 제외했다.
-- 실물 및 Arduino-ESP32 컴파일은 아직 수행하지 않았다. 배선과 API는 검토했으며 수업 시작 전 실제 보드 테스트가 필요하다.
+## 검증 상태
+- 모든 스케치: Arduino-ESP32 3.x 공개 헤더 시그니처(esp32-hal-ledc.h·adc.h) 기준 문법 검사 통과.
+- 예제 4: 호스트 시뮬레이션(바운스 입력·ADC 변화)으로 1회 누름=1회 토글, 경보 1초 주기 확인.
+- 실제 보드 업로드·배선 테스트는 수업 전 교수자가 수행해야 한다.
 
 ## 참고
 - Espressif DevKitC V4: https://docs.espressif.com/projects/esp-dev-kits/en/latest/esp32/esp32-devkitc/user_guide.html
-- Arduino ESP32 설치: https://docs.espressif.com/projects/arduino-esp32/en/latest/installing.html
-- 보조 블로그: https://machinejw.tistory.com/21
+- Arduino-ESP32 설치: https://docs.espressif.com/projects/arduino-esp32/en/latest/installing.html
+- 보조: https://machinejw.tistory.com/21
