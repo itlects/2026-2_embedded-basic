@@ -97,7 +97,7 @@ def common():
 
 # ================================================================ s2 비교표
 def compare():
-    W, H = 1240, 750
+    W, H = 1240, 840
     o = []
     title(o, "UART · I2C · SPI · 1-Wire 비교", "같은 '시리얼'이지만 선 개수, 클럭, 주소 방식, 속도가 다르다. 센서 데이터시트의 인터페이스 항목을 보고 고른다.")
     cols = [("항목", C["ink"]), ("UART", CU), ("I2C (TWI)", CI), ("SPI", CS), ("1-Wire", CW)]
@@ -106,11 +106,13 @@ def compare():
         ("클럭", "없음(비동기, baud 약속)", "SCL (마스터 생성)", "SCK (마스터 생성)", "없음(시간 슬롯)"),
         ("방향", "전이중", "반이중", "전이중", "반이중"),
         ("장치 선택", "1:1 연결", "7비트 주소", "장치마다 CS선", "64비트 ROM ID"),
-        ("일반 속도", "9600~115200bps(~Mbps)", "100k / 400kHz", "1~수십 MHz", "약 15.4kbps"),
+        ("일반 속도", "9600~115200bps(~Mbps)", "100k/400kHz (HS 3.4MHz)", "수 MHz~수십 MHz", "약 15.4kbps"),
+        ("통신 거리", "수 m (TTL 레벨)", "약 1m 이내(보드 위)", "수십 cm(고속일수록 짧게)", "수십 m 가능"),
+        ("수신 확인", "없음(패리티는 선택)", "ACK/NACK 있음", "없음", "CRC로 확인"),
         ("풀업 저항", "불필요", "필요(SDA·SCL, 4.7k)", "불필요", "필요(DQ, 4.7k)"),
         ("ESP32 핀", "UART0 1/3(USB), UART2 16/17", "SDA21 · SCL22", "SCK18·MISO19·MOSI23·CS4", "아무 GPIO (예 13)"),
         ("UNO 핀", "D0/D1(USB 공용)", "A4 · A5", "D13·D12·D11·CS D10", "아무 핀 (예 D2)"),
-        ("장점", "간단, PC와 바로 통신", "2선에 여러 장치", "가장 빠름, 구조 단순", "1선, 긴 거리, ID 내장"),
+        ("장점", "간단, PC와 바로 통신", "2선에 여러 장치, ACK", "가장 빠름, 풀업 불필요", "1선, 긴 배선, ID 내장"),
         ("단점", "1:1, 속도 불일치 시 깨짐", "느림, 주소 충돌", "선 많음, 장치당 CS", "느림, 타이밍 엄격"),
         ("9주차 예제", "시리얼 모니터·릴레이 명령", "BH1750 조도", "MAX6675 열전대", "DS18B20 온도"),
         ("그 밖의 센서", "GPS NEO-6M, PMS7003", "BMP280, SHT31, OLED", "MFRC522 RFID, SD카드", "DS1990 iButton"),
@@ -125,8 +127,9 @@ def compare():
         yy = y + 48 + i * 44
         o.append(rect(40, yy - 2, 1156, 40, "#ffffff" if i % 2 else "#f7f8fa", "#e3e7ee", 1, 4))
         for j, s in enumerate(r):
-            o.append(T(xs[j] + 10, yy + 24, s, 14 if j else 15, "bold" if j == 0 or i == 10 else "normal",
-                       [C["ink"], CU, CI, CS, CW][j] if (j == 0 or i == 10) else "#222"))
+            hl = r[0] == "9주차 예제"
+            o.append(T(xs[j] + 10, yy + 24, s, 14 if j else 15, "bold" if j == 0 or hl else "normal",
+                       [C["ink"], CU, CI, CS, CW][j] if (j == 0 or hl) else "#222"))
     o.append(T(40, H - 18, "※ DHT11(10주차)은 1-Wire가 아니라 제조사 고유의 단일선 프로토콜이다. '선이 1개'라고 모두 1-Wire는 아니다.", 14, "bold", "#a40000"))
     return "s2_serial_compare_ko.svg", svg(W, H, o)
 
@@ -335,6 +338,65 @@ def onewire():
                            "• DHT11은 1-Wire가 아니다(10주차)"]):
         o.append(T(785, 548 + i * 33, s, 14, "bold" if "DHT11" in s else "normal", "#a40000" if "DHT11" in s else "#222"))
     return "s6_onewire_protocol_ko.svg", svg(W, H, o)
+
+
+# ================================================================ s7 물리 계층 확장·선택 기준
+def physical():
+    W, H = 1240, 870
+    o = []
+    title(o, "UART를 멀리 보내기 — TTL · RS-232 · RS-485, 그리고 CAN · 방식 선택 기준",
+          "UART는 '데이터 형식(프레임)'이고, RS-232·RS-485는 그 신호를 멀리 보내는 '전기 규격(물리 계층)'이다. CAN은 차동 2선 위의 메시지 버스.")
+    # 단일 종단 vs 차동
+    card(o, 40, 110, 560, 330, "① 단일 종단(Single-ended) vs 차동(Differential)", C["ink"])
+    import math
+    def noisy(x0, y, bits, col, invert=False, noise=True, w=56, h=46):
+        pts = []
+        for i, b in enumerate(bits):
+            b = 1 - b if invert else b
+            for k in range(8):
+                x = x0 + i * w + k * w / 8
+                n = 9 * math.sin((x - x0) / 9.0) if noise else 0
+                pts.append((x, y - (h / 2 if b else -h / 2) + n))
+        o.append(line(pts, col, 2.5, cap="butt"))
+    bits = [1, 0, 1, 1, 0, 1, 0, 0]
+    o.append(T(70, 175, "단일 종단(TTL UART, RS-232): 신호 − GND", 14, "bold", CU))
+    noisy(80, 220, bits, CU)
+    o.append(T(70, 270, "→ 잡음이 그대로 신호에 더해진다", 13, fill="#555"))
+    o.append(T(70, 305, "차동(RS-485, CAN): A − B 두 선의 차이", 14, "bold", CI))
+    noisy(80, 345, bits, CI); noisy(80, 345, bits, "#c06000", invert=True)
+    o.append(T(70, 405, "→ 두 선에 같은 잡음이 들어와도 A−B에서 상쇄(공통 모드 제거)", 13, fill="#555"))
+    o.append(T(70, 428, "   꼬임선(Twisted pair) + 양 끝 120Ω 종단 저항", 13, fill="#555"))
+    # 표
+    card(o, 620, 110, 580, 330, "② 물리 계층 비교", C["ink"])
+    rows = [("", "TTL UART", "RS-232", "RS-485", "CAN"),
+            ("신호", "0/3.3V·5V", "±3~15V 역논리", "차동 A/B", "차동 H/L"),
+            ("구조", "1:1", "1:1", "다중(32대)", "다중 마스터"),
+            ("거리", "수 m", "약 15m", "약 1200m", "40m@1M"),
+            ("속도", "~Mbps", "~115kbps", "~10Mbps(단거리)", "1M(FD 8M)"),
+            ("칩", "직결", "MAX3232", "MAX485", "SN65HVD230"),
+            ("용도", "센서·디버그", "PLC·구형 장비", "Modbus·산업", "자동차·로봇")]
+    xs = [640, 700, 820, 940, 1070]
+    for i, r in enumerate(rows):
+        y = 170 + i * 38
+        if i == 0: o.append(rect(632, y - 22, 560, 30, "#eef2f7", "none", 0, 4))
+        for j, t in enumerate(r):
+            o.append(T(xs[j], y, t, 13, "bold" if i == 0 or j == 0 else "normal", C["ink"]))
+    o.append(T(640, 432, "ESP32: UART2+MAX3485(RS-485), 내장 TWAI+트랜시버(CAN)", 12, fill="#555"))
+    # 선택 기준
+    card(o, 40, 460, 1160, 380, "③ 어떤 방식을 고를까 — 정답은 '데이터시트가 지원하는 것' + 아래 기준", C["ink"])
+    choices = [("속도가 최우선(화면·SD·고속 ADC)", "SPI", CS), ("핀을 아끼며 저속 센서 여러 개", "I2C", CI),
+               ("PC·모듈과 1:1, 디버그 출력", "UART", CU), ("센서 여러 개를 긴 선 하나로(온도)", "1-Wire", CW),
+               ("수십~수백 m, 산업 현장 다수 장치", "RS-485", "#555"), ("실시간·고신뢰 다중 노드(차량)", "CAN", "#555")]
+    for i, (q, a, col) in enumerate(choices):
+        y = 552 + i * 50
+        o.append(rect(70, y - 26, 560, 40, "#fff", "#c9ced6", 1.5, 8)); o.append(T(90, y, q, 15))
+        o += arrow(640, y - 6, 700, y - 6, "#333", 2.5)
+        o.append(rect(710, y - 26, 130, 40, col, "none", 0, 8)); o.append(T(775, y, a, 16, "bold", "white", "middle"))
+    for i, t in enumerate(["• 실제 제품은 여러 방식을 섞어 쓴다", "  (예: I2C 센서 + SPI 화면 + UART GPS)",
+                           "• I2C로 큰 화면을 빠르게 갱신하려다", "  속도 한계로 실패하는 경우가 흔하다",
+                           "• 거리가 늘면 속도를 낮추거나", "  차동 규격으로 바꾼다"]):
+        o.append(T(880, 552 + i * 30, t, 14, "bold" if t.startswith("•") else "normal"))
+    return "s7_physical_layer_selection_ko.svg", svg(W, H, o)
 
 
 # ================================================================ 연결도 공통
@@ -557,7 +619,7 @@ def w_ow():
 
 if __name__ == "__main__":
     os.makedirs(OUT, exist_ok=True)
-    for f in (common, compare, uart, i2c, spi, onewire, lambda: w_relay("esp32"), lambda: w_relay("uno"), w_loopback, w_i2c, w_spi, w_ow):
+    for f in (common, compare, physical, uart, i2c, spi, onewire, lambda: w_relay("esp32"), lambda: w_relay("uno"), w_loopback, w_i2c, w_spi, w_ow):
         n, s = f()
         open(os.path.join(OUT, n), "w", encoding="utf-8").write(s)
         print(n)
