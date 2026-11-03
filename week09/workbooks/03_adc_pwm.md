@@ -5,7 +5,9 @@
 
 ## 1. 원리 확인
 ![ADC 원리](../images/t4_adc_principle_ko.png)
+
 ![PWM 원리](../images/t5_pwm_principle_ko.png)
+
 ![흐름](../images/t6_adc_to_pwm_flow_ko.png)
 
 ## 2. 회로도
@@ -53,6 +55,7 @@ void loop() {
 예상 출력: `ADC=2048  mV=1650  PWM=127` (값은 보드마다 다름). 도구 → **시리얼 플로터**로 보면 그래프로 확인 가능.
 
 ## 6. 측정 기록
+
 | 손잡이 위치 | ADC | mV(코드) | 멀티미터 V | PWM | LED 밝기 |
 |---|---:|---:|---:|---:|---|
 | 왼쪽 끝 | | | | | |
@@ -65,6 +68,7 @@ void loop() {
 
 ## 7. PWM 단계 실험 — [03b_ledc_pwm_steps.ino](../examples/03b_ledc_pwm_steps/03b_ledc_pwm_steps.ino) (LED만 사용)
 `ledcAttach(25, 5000, 8)` 후 듀티 0 → 64 → 128 → 192 → 255를 1.5초마다 바꾼다.
+
 | duty | % | 평균 전압(계산) | 밝기 1~5 |
 |---:|---:|---:|---|
 | 0 | 0 | 0 V | |
@@ -76,6 +80,7 @@ void loop() {
 추가: `PWM_FREQ`를 5000 → 5로 바꾸면 무엇이 보이는가? (깜빡임 = PWM의 정체)
 
 ## 8. 문제 해결
+
 | 증상 | 확인 |
 |---|---|
 | ADC가 항상 0 | 가변저항 3V3 연결 · j6 점퍼 · + 레일이 3V3인지 |

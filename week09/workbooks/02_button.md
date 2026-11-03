@@ -5,6 +5,7 @@
 
 ## 1. 회로 이해
 ![예제2 회로도](../images/ex2_button_schematic_ko.png)
+
 ![디바운스](../images/t3_button_debounce_ko.png)
 
 - `INPUT_PULLUP`: 내부 저항(약 45kΩ)이 GPIO18을 3.3V로 당김 → 놓으면 **HIGH**, 누르면 GND 연결 → **LOW**
@@ -42,6 +43,7 @@ previousRaw = raw;
 
 ## 5. 바운싱 관찰 — [02b_bounce_count.ino](../examples/02b_bounce_count/02b_bounce_count.ino) (같은 회로)
 시리얼 모니터 입력창에 숫자를 보내면 디바운스 시간이 바뀐다.
+
 | DEBOUNCE_MS | 10회 누름 후 press 수 | rawEdges(바운스 포함) | 체감 반응 |
 |---:|---:|---:|---|
 | 0 | | | |
@@ -52,6 +54,7 @@ previousRaw = raw;
 예상: rawEdges는 누름 횟수×2보다 크게 나올 수 있다(누름+뗌+바운스). 200ms면 빠르게 연타할 때 누락이 생긴다.
 
 ## 6. 동작 검증
+
 | 시험 | 기대 결과 | 관찰 | 판정 |
 |---|---|---|---|
 | 버튼 1회 | LED 켜짐, 로그 1줄 | | |
@@ -59,6 +62,7 @@ previousRaw = raw;
 | 버튼을 길게 누름 | 토글 1회만 | | |
 
 ## 7. 문제 해결
+
 | 증상 | 확인 |
 |---|---|
 | 누르지 않아도 계속 토글/LOW | 버튼이 같은 쪽 다리(항상 연결)에 꽂힘 → 90° 돌리거나 대각선 확인 |
