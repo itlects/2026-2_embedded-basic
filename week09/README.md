@@ -13,7 +13,7 @@
 | [이론 Part B](theory/02_serial_comm.md) | 공통 원리, 4방식 비교, UART·I2C·SPI·1-Wire 파형 |
 | [워크북 5](workbooks/06_uart_bidir_relay.md) | UART 양방향: 센서값 송신 + 명령으로 릴레이 (예제 5, 5B) |
 | [워크북 6](workbooks/07_i2c_bh1750.md) | I2C BH1750 조도 (예제 6B 스캐너, 6) |
-| [워크북 7](workbooks/08_spi_max6675.md) | SPI MAX6675 열전대 (예제 7) |
+| [워크북 7](workbooks/08_spi_max6675.md) | SPI 보드 간 통신 UNO↔UNO (예제 7B 마스터·7C 슬레이브) + MAX6675 열전대 (예제 7) |
 | [워크북 8](workbooks/09_onewire_ds18b20.md) | 1-Wire DS18B20 온도 (예제 8) |
 
 예제 5·6·7·8은 같은 스케치가 ESP32와 Arduino UNO 모두에서 동작한다(핀 자동 선택). 5B만 ESP32 전용.
@@ -31,7 +31,7 @@
 | 15~40분 | 시리얼 공통 원리·4방식 비교·UART | [이론 Part B](theory/02_serial_comm.md) · 예제 5B | 루프백 로그 |
 | 40~90분 | **UART 양방향: 센서 송신 + 릴레이 명령** | [워크북5](workbooks/06_uart_bidir_relay.md) · 예제 5 | 명령·응답 로그, 영상 |
 | 90~115분 | I2C BH1750 | [워크북6](workbooks/07_i2c_bh1750.md) · 예제 6B, 6 | 주소·조도 기록 |
-| 115~140분 | SPI MAX6675 | [워크북7](workbooks/08_spi_max6675.md) · 예제 7 | 비트 해석표 |
+| 115~140분 | SPI 보드 간 통신 + MAX6675 | [워크북7](workbooks/08_spi_max6675.md) · 예제 7B·7C, 7 | 양쪽 시리얼 로그, 비트 해석표 |
 | 140~160분 | 1-Wire DS18B20 | [워크북8](workbooks/09_onewire_ds18b20.md) · 예제 8 | ROM ID·온도 |
 | 160~180분 | 4방식 비교 정리, 보고서 | [보고서 양식](workbooks/05_report_template.md) | 제출 |
 
@@ -69,6 +69,7 @@ week09/
 │   ├─ 05_uart_bidir_relay          UART 양방향: 센서 송신 + 명령→릴레이 (ESP32/UNO)
 │   ├─ 05b_uart2_loopback           ESP32 UART2 TX↔RX 루프백
 │   ├─ 06b_i2c_scanner / 06_i2c_bh1750   I2C 주소 스캔 / 조도
+│   ├─ 07b_spi_master / 07c_spi_slave_uno  SPI 보드 간 통신(마스터 UNO·ESP32 / 슬레이브 UNO 레지스터)
 │   ├─ 07_spi_max6675               SPI 열전대
 │   └─ 08_onewire_ds18b20           1-Wire 온도 (OneWire 라이브러리)
 └─ images/                          SVG 원본 + PNG (gen_theory.py, gen_examples.py로 재생성)

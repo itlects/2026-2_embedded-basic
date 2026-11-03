@@ -43,3 +43,10 @@
 | 1-Wire와 DHT11 혼동 가능성 | 10주차가 DHT11 | 비교표·1-Wire 그림에 'DHT11은 1-Wire 아님' 명시 |
 
 추가 고려: ESP32(3.3V)에 5V Active-LOW 릴레이 모듈을 쓰면 HIGH로 완전히 꺼지지 않을 수 있어, OFF 시 핀을 INPUT(고임피던스)으로 바꾸는 relayWrite()를 넣고 UNO 대안을 함께 제시했다. SPI CS는 부팅 스트랩 GPIO5 대신 GPIO4를 사용했다.
+
+## E. SPI 실습 재구성 (2026-11-04)
+요청: SPI 실습을 ipmes 블로그 방식(https://ipmes.tistory.com/115 시리즈)으로. 115번은 아두이노 간 I2C 편이며, 같은 시리즈의 SPI 편(116번: 아두이노 2대, 마스터가 A~Z 전송, 슬레이브는 SPCR/SPDR + ISR(SPI_STC_vect))의 구조를 따랐다(코드는 새로 작성).
+- 예제 7B 마스터(UNO·ESP32 공용), 7C 슬레이브(UNO 레지스터). 슬레이브가 소문자 응답을 SPDR에 넣어 전이중·'한 박자 늦은 응답'을 관찰하도록 확장.
+- ESP32 마스터 + UNO 슬레이브 시 UNO MISO(5V)를 1k/2k 분압해 ESP32에 연결.
+- 워크북 7: Part A 보드 간 통신(필수), Part B MAX6675(응용).
+- 검증: 7B는 ESP32·UNO, 7C는 AVR 레지스터 스텁으로 문법 검사 통과. 실제 2보드 통신은 미검증.

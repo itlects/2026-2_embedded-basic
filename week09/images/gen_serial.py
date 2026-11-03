@@ -617,9 +617,77 @@ def w_ow():
     return "ex8_onewire_ds18b20_ko.svg", svg(W, yt + 20, o)
 
 
+def w_spi_boards():
+    W, H = 1240, 1130
+    o = []
+    title(o, "예제 7B·7C · SPI 보드 간 통신 — 마스터가 'A'~'Z'를 보내고, 슬레이브가 동시에 응답",
+          "SPI는 '같은 이름끼리' 연결한다(SS-SS, MOSI-MOSI, MISO-MISO, SCK-SCK). UART처럼 TX/RX를 교차하지 않는다. GND 공통 필수.")
+    # ① UNO ↔ UNO
+    card(o, 40, 110, 1160, 360, "① Arduino UNO(마스터) ↔ Arduino UNO(슬레이브)", CS)
+    names = [("D10 SS", "#c62828"), ("D11 MOSI", CS), ("D12 MISO", "#2664bf"), ("D13 SCK", "#555"), ("GND", "#222")]
+    lp = board(o, 80, 150, "UNO 마스터 (7B)", [(n, 80 + i * 45) for i, (n, _) in enumerate(names)], 250)
+    o.append(rect(870, 150, 250, max(80 + i * 45 for i in range(5)) + 60, C["board"], C["boardS"], 3, 14))
+    o.append(T(995, 182, "UNO 슬레이브 (7C)", 19, "bold", "white", "middle"))
+    for i, (n, col) in enumerate(names):
+        y = 150 + 80 + i * 45
+        o.append(f'<rect x="876" y="{y-8}" width="16" height="16" rx="2" fill="#111"/>')
+        o.append(T(900, y + 5, n, 15, "bold", "white"))
+        o.append(line([lp[n], (876, y)], col, 4)); o.append(dot(876, y, col, 4))
+    arrows = [("SS: 마스터 → 슬레이브 (LOW=선택)", 0), ("MOSI: 마스터 → 슬레이브 (보낼 글자)", 1),
+              ("MISO: 슬레이브 → 마스터 (응답)", 2), ("SCK: 마스터가 클럭 생성", 3)]
+    for t, i in arrows:
+        o.append(T(600, 150 + 80 + i * 45 - 8, t, 13, "bold", names[i][1], "middle"))
+    o.append(T(600, 445, "각 보드 USB → PC (시리얼 모니터 2개: IDE 창을 2개 열어 COM 포트를 각각 선택)", 14, fill="#333", anchor="middle"))
+    # ② ESP32 → UNO
+    card(o, 40, 490, 580, 400, "② ESP32(마스터) → UNO(슬레이브): MISO 분압", CS)
+    ep = board(o, 70, 545, "ESP32 (7B)", [("GPIO4 SS", 70), ("GPIO23 MOSI", 110), ("GPIO18 SCK", 150), ("GPIO19 MISO", 190), ("GND", 230)], 210)
+    ux = 480
+    o.append(rect(ux, 545, 120, 290, C["board"], C["boardS"], 3, 12)); o.append(T(ux + 60, 575, "UNO", 17, "bold", "white", "middle"))
+    uy = {}
+    for i, n in enumerate(["D10", "D11", "D13", "D12", "GND"]):
+        y = 545 + 70 + i * 40; uy[n] = y
+        o.append(f'<rect x="{ux+4}" y="{y-8}" width="16" height="16" rx="2" fill="#111"/>'); o.append(T(ux + 28, y + 5, n, 14, "bold", "white"))
+    for n, u, col in [("GPIO4 SS", "D10", "#c62828"), ("GPIO23 MOSI", "D11", CS), ("GPIO18 SCK", "D13", "#555"), ("GND", "GND", "#222")]:
+        o.append(line([ep[n], (ux + 4, uy[u])], col, 3.5))
+    ym = uy["D12"]
+    o.append(line([(ux + 4, ym), (440, ym)], "#2664bf", 3.5))
+    o.append(f'<rect x="395" y="{ym-10}" width="45" height="20" rx="3" fill="#fff5da" stroke="#8a5818" stroke-width="2"/>')
+    o.append(T(417, ym - 14, "1kΩ", 12, "bold", "#8a5818", "middle"))
+    o.append(line([(395, ym), ep["GPIO19 MISO"]], "#2664bf", 3.5)); o.append(circle(350, ym, 5, "#2664bf"))
+    o.append(f'<rect x="342" y="{ym+8}" width="16" height="26" rx="3" fill="#fff5da" stroke="#8a5818" stroke-width="2"/>')
+    o.append(line([(350, ym), (350, ym + 8)], "#2664bf", 2.5)); o.append(line([(350, ym + 34), (350, uy["GND"])], "#222", 2.5))
+    o.append(circle(350, uy["GND"], 5, "#222")); o.append(T(362, ym + 28, "2kΩ", 12, "bold", "#8a5818"))
+    o.append(T(60, 862, "ESP32→UNO 방향(3.3V)은 UNO가 HIGH로 인식(VIH≈3.0V)하지만 여유가 작다.", 12, fill="#555"))
+    o.append(T(60, 880, "UNO MISO는 5V → ESP32에 직결 금지. 5V×2k/(1k+2k)≈3.3V로 낮춘다(또는 레벨 시프터).", 13, "bold", "#c62828"))
+    # ③ 시프트 레지스터 교환
+    card(o, 640, 490, 560, 400, "③ SPI = 두 시프트 레지스터의 맞교환", CS)
+    o.append(rect(670, 560, 200, 50, "#fff", CS, 2.5, 6)); o.append(T(770, 592, "마스터 8비트", 15, "bold", CS, "middle"))
+    o.append(rect(980, 560, 190, 50, "#fff", "#2664bf", 2.5, 6)); o.append(T(1075, 592, "슬레이브 SPDR", 15, "bold", "#2664bf", "middle"))
+    o += arrow(870, 575, 978, 575, CS, 3); o.append(T(924, 568, "MOSI", 12, "bold", CS, "middle"))
+    o += arrow(980, 598, 872, 598, "#2664bf", 3); o.append(T(924, 622, "MISO", 12, "bold", "#2664bf", "middle"))
+    o.append(T(670, 652, "SCK 8번 → 두 레지스터 내용이 서로 바뀐다", 14, "bold", "#333"))
+    rows = [("전송", "MOSI(보냄)", "MISO(받음)"), ("1", "'A'", "'-' (초기값)"), ("2", "'B'", "'a' (A의 응답)"),
+            ("3", "'C'", "'b'"), ("…", "…", "…")]
+    for i, r in enumerate(rows):
+        y = 700 + i * 32
+        for j, t in enumerate(r):
+            o.append(T(690 + j * 150, y, t, 14, "bold" if i == 0 else "normal", [C["ink"], CS, "#2664bf"][j]))
+    o.append(T(670, 868, "응답은 한 박자 늦다: 슬레이브는 받은 '뒤'에야 다음 응답을 준비", 13, fill="#555"))
+    # ④ 동작 순서
+    card(o, 40, 910, 1160, 200, "④ 코드 흐름", CS)
+    left = ["[마스터 7B]", "SPI.beginTransaction(1MHz, 모드0)", "digitalWrite(SS, LOW)   ← 슬레이브 선택",
+            "reply = SPI.transfer('A')   ← 보내며 받기", "digitalWrite(SS, HIGH)  ← 선택 해제"]
+    right = ["[슬레이브 7C, UNO 레지스터]", "pinMode(MISO, OUTPUT); SPCR |= _BV(SPE);  ← 슬레이브 모드",
+             "SPI.attachInterrupt();  ← SPIE=1", "ISR(SPI_STC_vect){ b = SPDR; SPDR = 응답; flag=true; }",
+             "loop(): flag면 Serial.print (ISR 안에서 출력 금지)"]
+    for i, t in enumerate(left): o.append(mono(70, 965 + i * 34, t, 14, w="bold" if i == 0 else "normal"))
+    for i, t in enumerate(right): o.append(mono(620, 965 + i * 34, t, 14, w="bold" if i == 0 else "normal"))
+    return "ex7b_spi_board_to_board_ko.svg", svg(W, H, o)
+
+
 if __name__ == "__main__":
     os.makedirs(OUT, exist_ok=True)
-    for f in (common, compare, physical, uart, i2c, spi, onewire, lambda: w_relay("esp32"), lambda: w_relay("uno"), w_loopback, w_i2c, w_spi, w_ow):
+    for f in (common, compare, physical, uart, i2c, spi, onewire, lambda: w_relay("esp32"), lambda: w_relay("uno"), w_loopback, w_i2c, w_spi, w_spi_boards, w_ow):
         n, s = f()
         open(os.path.join(OUT, n), "w", encoding="utf-8").write(s)
         print(n)
