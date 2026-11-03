@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1250" height="760" viewBox="0 0 1250 760">
+<rect width="1250" height="760" fill="#fafcff"/>
+<text x="52" y="58" font-family="Arial" font-weight="bold" font-size="33" fill="#112642">ESP32-DevKitC V4 — DHT11 + microSD data logger</text>
+<text x="52" y="96" font-family="Arial" font-size="20" fill="#42546a">Diagram labels are GPIO numbers. Match pin silk screen on the physical board.</text>
+<rect x="75" y="155" width="410" height="515" rx="18" fill="#1b3855"/>
+<text x="113" y="201" font-family="Arial" font-size="26" fill="#ffffff">ESP32 DevKitC V4</text>
+<rect x="780" y="155" width="390" height="397" rx="18" fill="#eeeaf8" stroke="#66558a" stroke-width="4"/>
+<text x="815" y="201" font-family="Arial" font-size="26" fill="#453275">microSD SPI module</text>
+<text x="118" y="262" font-family="Arial" font-size="23" fill="white">3V3</text><text x="805" y="262" font-family="Arial" font-size="23" fill="#392958">VCC 3.3V</text>
+<path d="M 450 255 L 775 255" stroke="#d64444" stroke-width="6" fill="none"/>
+<text x="118" y="312" font-family="Arial" font-size="23" fill="white">GND</text><text x="805" y="312" font-family="Arial" font-size="23" fill="#392958">GND</text>
+<path d="M 450 305 L 775 305" stroke="#20252d" stroke-width="6" fill="none"/>
+<text x="118" y="362" font-family="Arial" font-size="23" fill="white">GPIO18</text><text x="805" y="362" font-family="Arial" font-size="23" fill="#392958">CLK / SCK</text>
+<path d="M 450 355 L 775 355" stroke="#cc7a00" stroke-width="6" fill="none"/>
+<text x="118" y="412" font-family="Arial" font-size="23" fill="white">GPIO19</text><text x="805" y="412" font-family="Arial" font-size="23" fill="#392958">DO / MISO</text>
+<path d="M 450 405 L 775 405" stroke="#1d82be" stroke-width="6" fill="none"/>
+<text x="118" y="462" font-family="Arial" font-size="23" fill="white">GPIO23</text><text x="805" y="462" font-family="Arial" font-size="23" fill="#392958">DI / MOSI</text>
+<path d="M 450 455 L 775 455" stroke="#1e9d69" stroke-width="6" fill="none"/>
+<text x="118" y="512" font-family="Arial" font-size="23" fill="white">GPIO5</text><text x="805" y="512" font-family="Arial" font-size="23" fill="#392958">CS</text>
+<path d="M 450 505 L 775 505" stroke="#814cb6" stroke-width="6" fill="none"/>
+<rect x="780" y="591" width="390" height="114" rx="18" fill="#dff4e5" stroke="#3a8d5c" stroke-width="3"/>
+<text x="805" y="626" font-family="Arial" font-size="25" fill="#185b31">DHT11 sensor module</text>
+<text x="805" y="658" font-family="Arial" font-size="20" fill="#185b31">VCC→3V3, GND→GND</text>
+<text x="805" y="690" font-family="Arial" font-size="20" fill="#185b31">DATA / OUT→GPIO27</text>
+<text x="116" y="635" font-family="Arial" font-size="23" fill="white">GPIO27</text>
+<path d="M 450 628 L 675 628 L 675 682 L 775 682" fill="none" stroke="#d36d9c" stroke-width="6"/>
+<text x="54" y="732" font-family="Arial" font-size="19" fill="#a53a45">3.3 V-compatible modules only. All GND lines common. Power off before rewiring.</text></svg>
