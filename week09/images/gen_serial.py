@@ -684,10 +684,102 @@ def w_spi_boards():
     for i, t in enumerate(right): o.append(mono(620, 965 + i * 34, t, 14, w="bold" if i == 0 else "normal"))
     return "ex7b_spi_board_to_board_ko.svg", svg(W, H, o)
 
+def dht_part(o, x, y, label="DHT11 모듈"):
+    o.append(rect(x, y, 110, 130, "#2a7fc4", "#14507e", 2, 8))
+    for r in range(4):
+        for c in range(5):
+            o.append(f'<rect x="{x+12+c*18}" y="{y+14+r*18}" width="12" height="12" rx="2" fill="#bfe0f7"/>')
+    o.append(T(x + 55, y + 100, label, 12, "bold", "white", "middle"))
+    pos = {}
+    for k, lab in enumerate(["S", "+", "−"]):
+        px = x + 25 + k * 30
+        o.append(T(px, y + 124, lab, 13, "bold", "white", "middle"))
+        o.append(line([(px, y + 130), (px, y + 160)], "#999", 4)); o.append(circle(px, y + 164, 6, "#d4af37"))
+        pos[lab] = (px, y + 164)
+    return pos
+
+
+def lcd_part(o, x, y):
+    o.append(rect(x, y, 300, 110, "#1f5f2a", "#0f3a16", 2, 8))
+    o.append(rect(x + 20, y + 20, 260, 70, "#9ed36a", "#4a7a2a", 2, 4))
+    o.append(mono(x + 34, y + 50, "Temp: 24°C", 18, "#123", w="bold")); o.append(mono(x + 34, y + 78, "Humi: 55 %", 18, "#123", w="bold"))
+    o.append(rect(x + 300, y + 10, 60, 90, "#222", "#000", 2, 4)); o.append(T(x + 330, y + 30, "PCF", 11, "bold", "white", "middle"))
+    o.append(T(x + 330, y + 44, "8574", 11, "bold", "white", "middle"))
+    pos = {}
+    for k, lab in enumerate(["GND", "VCC", "SDA", "SCL"]):
+        py = y + 54 + k * 14
+        o.append(circle(x + 360, py, 5, "#d4af37")); o.append(T(x + 352, py + 4, lab, 10, "bold", "white", "end")); pos[lab] = (x + 360, py)
+    return pos
+
+
+def w_dht_lcd():
+    W, H = 1240, 820
+    o = []
+    title(o, "예제 6C · DHT11 온습도 → I2C LCD1602 (BH1750이 없을 때의 I2C 실습)",
+          "DHT11은 I2C가 아니다(전용 단일선). I2C로 통신하는 장치는 LCD 백팩(PCF8574, 주소 0x27/0x3F) — SDA·SCL 2선으로 글자를 보낸다.")
+    bp = board(o, 60, 130, "Arduino UNO", [("5V", 70), ("GND", 120), ("A4 SDA", 180), ("A5 SCL", 230), ("D2", 300)], 250)
+    lp = lcd_part(o, 700, 140)
+    dp = dht_part(o, 720, 360)
+    o.append(line([bp["A4 SDA"], (520, bp["A4 SDA"][1]), (520, lp["SDA"][1] + 0), (640, lp["SDA"][1]), (640, 120), (1100, 120), (1100, lp["SDA"][1]), lp["SDA"]], CI, 3.5))
+    o.append(line([bp["A5 SCL"], (540, bp["A5 SCL"][1]), (540, 108), (1120, 108), (1120, lp["SCL"][1]), lp["SCL"]], "#555", 3.5))
+    o.append(line([bp["5V"], (480, bp["5V"][1]), (480, 96), (1140, 96), (1140, lp["VCC"][1]), lp["VCC"]], C["red"], 3.5))
+    o.append(line([bp["GND"], (500, bp["GND"][1]), (500, 600), (1160, 600), (1160, lp["GND"][1]), lp["GND"]], "#222", 3.5))
+    o.append(line([bp["D2"], (600, bp["D2"][1]), (600, 560), (dp["S"][0], 560), dp["S"]], CW, 3.5))
+    o.append(line([(480, bp["5V"][1]), (480, 575), (dp["+"][0], 575), dp["+"]], C["red"], 3.5))
+    o.append(line([(dp["−"][0], dp["−"][1]), (dp["−"][0], 600)], "#222", 3.5)); o.append(circle(dp["−"][0], 600, 5, "#222"))
+    o.append(T(860, 410, "핀 순서(S·+·−)는 모듈마다", 13, "bold", "#c62828"))
+    o.append(T(860, 430, "다르다 → 실크인쇄 확인", 13, "bold", "#c62828"))
+    o.append(T(860, 460, "4핀 단품: DATA–VCC 10kΩ 풀업", 12, fill="#555"))
+    yt = pin_table(o, 60, 670, [("LCD SDA / SCL", "GPIO21 / GPIO22", "A4 / A5", "I2C, 주소 0x27(또는 0x3F)"),
+                                ("LCD VCC", "5V(+레벨 시프터) 또는 3.3V LCD", "5V", "5V 백팩 풀업이 SDA/SCL을 5V로 당김"),
+                                ("DHT11 S / + / −", "GPIO4 / 3V3 / GND", "D2 / 5V / GND", "전용 단일선(I2C 아님)")])
+    return "ex6c_dht11_i2c_lcd_ko.svg", svg(W, yt + 20, o)
+
+
+def w_i2c_two_uno():
+    W, H = 1240, 900
+    o = []
+    title(o, "예제 6D·6E · I2C 보드 간 통신 — 슬레이브 UNO가 DHT11을 측정, 마스터 UNO가 요청",
+          "I2C는 '같은 이름끼리'(SDA-SDA, SCL-SCL) + GND. 마스터가 클럭을 만들고, 슬레이브는 주소 0x08로 응답한다. 추가 I2C 부품이 필요 없다.")
+    names = [("A4 SDA", CI), ("A5 SCL", "#555"), ("GND", "#222")]
+    lp = board(o, 60, 140, "UNO 마스터 (6D)", [(n, 80 + i * 55) for i, (n, _) in enumerate(names)], 250)
+    sx = 830
+    o.append(rect(sx, 140, 250, 370, C["board"], C["boardS"], 3, 14)); o.append(T(sx + 125, 172, "UNO 슬레이브 (6E)", 19, "bold", "white", "middle"))
+    o.append(T(sx + 125, 196, "Wire.begin(0x08)", 13, fill="#dce9f7", anchor="middle"))
+    sp = {}
+    for i, (n, col) in enumerate(names):
+        y = 140 + 80 + i * 55
+        o.append(f'<rect x="{sx+6}" y="{y-8}" width="16" height="16" rx="2" fill="#111"/>'); o.append(T(sx + 30, y + 5, n, 15, "bold", "white"))
+        o.append(line([lp[n], (sx + 6, y)], col, 4)); o.append(dot(sx + 6, y, col, 4)); sp[n] = (sx + 6, y)
+    for lab, dy in (("D2", 260), ("5V", 300), ("D13 LED", 340)):
+        y = 140 + dy
+        o.append(f'<rect x="{sx+250-22}" y="{y-8}" width="16" height="16" rx="2" fill="#111"/>'); o.append(T(sx + 250 - 30, y + 5, lab, 14, "bold", "white", "end")); sp[lab] = (sx + 250 - 6, y)
+    o.append(circle(sx + 150, 140 + 340, 0, "none"))
+    dp = dht_part(o, 1110, 230)
+    o.append(line([sp["D2"], (1135, sp["D2"][1]), dp["S"]], CW, 3.5))
+    o.append(line([sp["5V"], (1165, sp["5V"][1]), dp["+"]], C["red"], 3.5))
+    o.append(line([dp["−"], (dp["−"][0], 440)], "#222", 3.5)); o.append(T(dp["−"][0], 460, "GND", 12, "bold", "#222", "middle"))
+    o.append(T(sx + 125, 530, "D13 = 보드 내장 LED (온도 경보 표시)", 13, fill="#333", anchor="middle"))
+    o.append(T(570, 210, "SDA: 데이터(양방향)", 13, "bold", CI, "middle"))
+    o.append(T(570, 265, "SCL: 마스터가 클럭 생성", 13, "bold", "#555", "middle"))
+    o.append(T(570, 380, "UNO Wire가 내부 풀업을 켠다(짧은 배선이면 동작). 길면 4.7kΩ 외부 풀업", 12, fill="#555", anchor="middle"))
+    # 시퀀스
+    card(o, 40, 540, 1160, 330, "통신 순서 (2초마다)", CI)
+    seq = [("① 읽기", "Wire.requestFrom(0x08, 4)", "START · 0x08+R · ACK", "onRequest() → Wire.write(packet, 4)"),
+           ("", "Wire.read() ×4", "[상태][온도][습도][체크섬] · STOP", "packet은 loop에서 2초마다 DHT11로 갱신"),
+           ("② 쓰기", "beginTransmission(0x08); write(1/0)", "START · 0x08+W · ACK · 명령 · ACK", "onReceive(n) → LED 명령 저장"),
+           ("", "endTransmission() == 0 → ACK", "STOP", "loop에서 D13 LED ON/OFF")]
+    o.append(T(80, 600, "단계", 14, "bold")); o.append(T(170, 600, "마스터 6D", 14, "bold", CI)); o.append(T(560, 600, "버스", 14, "bold", "#555")); o.append(T(860, 600, "슬레이브 6E", 14, "bold", CI))
+    for i, (a, b, c, d) in enumerate(seq):
+        y = 645 + i * 46
+        o.append(T(80, y, a, 14, "bold")); o.append(mono(170, y, b, 13)); o.append(T(560, y, c, 13, fill="#333")); o.append(T(860, y, d, 13))
+    o.append(T(80, 845, "⚠ ESP32를 마스터로 쓰려면 UNO 쪽 5V 풀업 때문에 I2C 양방향 레벨 시프터가 필요하다. 이 실습은 UNO 2대 권장.", 13, "bold", "#c62828"))
+    return "ex6d_i2c_two_uno_dht11_ko.svg", svg(W, H, o)
+
 
 if __name__ == "__main__":
     os.makedirs(OUT, exist_ok=True)
-    for f in (common, compare, physical, uart, i2c, spi, onewire, lambda: w_relay("esp32"), lambda: w_relay("uno"), w_loopback, w_i2c, w_spi, w_spi_boards, w_ow):
+    for f in (common, compare, physical, uart, i2c, spi, onewire, lambda: w_relay("esp32"), lambda: w_relay("uno"), w_loopback, w_i2c, w_dht_lcd, w_i2c_two_uno, w_spi, w_spi_boards, w_ow):
         n, s = f()
         open(os.path.join(OUT, n), "w", encoding="utf-8").write(s)
         print(n)

@@ -138,6 +138,8 @@ UART는 **데이터 형식(프레임)**이고, RS-232·RS-485는 그 신호를 �
 | 5 | UART 양방향 | 가변저항 + 릴레이 모듈 + LED | GPIO34, GPIO32 | A0, D7 | 없음 |
 | 5B | UART2 루프백 | 점퍼선 1개 | GPIO16↔17 | (ESP32 전용) | 없음 |
 | 6B | I2C 스캐너 | I2C 모듈 아무거나 | 21/22 | A4/A5 | Wire(내장) |
+| 6C | I2C (대체) | DHT11 + I2C LCD1602 | 21/22, DHT 4 | A4/A5, DHT D2 | Wire + LiquidCrystal I2C + DHT |
+| 6D · 6E | I2C 보드 간 (대체) | UNO 2대 + DHT11 | — | A4/A5 | Wire + DHT |
 | 6 | I2C | BH1750(GY-302) | 21/22 | A4/A5 | Wire(내장) |
 | 7B · 7C | SPI 보드 간 | UNO 2대(또는 ESP32 마스터 + UNO 슬레이브) | 18/19/23, SS 4 | 10/11/12/13 | SPI + AVR 레지스터 |
 | 7 | SPI 센서 | MAX6675 + K형 열전대 | 18/19, CS 4 | 13/12, CS 10 | SPI(내장) |
