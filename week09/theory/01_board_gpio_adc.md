@@ -1,35 +1,108 @@
-# ESP32-DevKitC V4: 이론과 핀맵
+# 9주차 이론학습 — ESP32-DevKitC V4 GPIO·ADC·PWM
 
-## 동작 구성
-ESP32는 CPU, 메모리, Wi-Fi/블루투스와 GPIO 주변장치가 한 칩에 있는 MCU이다. DevKitC V4는 USB-UART 브리지, Micro-USB 전원/통신, EN 리셋과 BOOT 다운로드 버튼, I/O 헤더가 있다. 개발보드 버전별 실장 WROOM 모듈이 다를 수 있으므로 **반드시 보드 실크 인쇄 확인**.
+## 1. ESP32-DevKitC V4 특징
+- ESP32 모듈을 장착한 개발보드. Wi-Fi·Bluetooth 및 GPIO·ADC·PWM(LEDC)·UART·I2C·SPI 지원
+- Micro-USB 통신/전원, USB-UART 브리지, EN 리셋, BOOT 다운로드 버튼, 양쪽 GPIO 헤더
+- 실장 모듈(WROOM/WROVER 등)과 헤더 실크인쇄를 반드시 확인
+- 공식 핀배치: https://docs.espressif.com/projects/esp-dev-kits/en/latest/esp32/esp32-devkitc/user_guide.html
 
-## 전원과 논리
-USB 5V는 보드의 전원 회로를 거쳐 3.3V를 공급한다. 센서·가변저항은 보드의 **3V3-GND**를 사용한다. USB와 별도의 5V/3V3 전원을 동시에 공급하지 않는다. GPIO 입력에 5V를 인가하지 않는다.
-
-## 실습 핀 요약
-| 역할 | GPIO | 선택 이유 |
+## 2. Arduino UNO R3와의 차이
+| 항목 | UNO R3 | ESP32-DevKitC V4(전통적 ESP32 모듈) |
 |---|---|---|
-| LED | 25 | 일반 디지털 출력 / PWM 가능 |
-| LED2 | 26 | 일반 디지털 출력 / PWM 가능 |
-| 버튼1 | 18 | 내부 풀업 가능 |
-| 버튼2 | 19 | 내부 풀업 가능 |
-| 가변저항 신호 | 34 | 입력 전용 ADC1_CH6 (Wi-Fi 사용 시 ADC2 충돌을 피하기 위한 선택) |
-| 부저 | 27 | 수동 부저에 PWM 주파수 출력 (소형 저전류 모듈만 직접 연결 가능) |
-| 전원 | 3V3, GND | 센서 공급 및 기준전위 |
+| MCU | ATmega328P | ESP32 |
+| 구조 | 8비트 16MHz | 32비트 일반적 듀얼코어 최대 240MHz |
+| 로직 레벨 | 5V | 3.3V |
+| ADC | 10비트 0~1023 | 12비트 0~4095 (ADC 감쇠/보정 주의) |
+| PWM | 6개 PWM 출력 핀 | LEDC 기능을 여러 GPIO에 할당 |
+| 무선 | 별도 모듈 필요 | Wi-Fi/Bluetooth 내장 |
+| 버튼 | INPUT_PULLUP | INPUT_PULLUP; GPIO34~39에서는 내부 풀업 불가 |
+ESP32에 UNO의 5V 출력 신호를 직접 연결하면 안 된다.
 
-입력 전용(GPIO34~39)에 LED나 부저를 연결하면 동작하지 않는다. GPIO0,2,5,12,15는 부팅 스트래핑 관련 핀이므로 초보자 실습에서 사용하지 않는다. GPIO6~11은 SPI 플래시 연결 핀. UART0 TX/RX(GPIO1/3)는 업로드/로그에 사용된다. GPIO4도 보드 사양에 따라 스트래핑 영향을 검토한다.
+## 3. GPIO 기본 원리
+GPIO(General Purpose Input/Output)는 프로그래밍 가능한 디지털 입력·출력 핀이다. 입력은 버튼의 HIGH/LOW를 판독하고 출력은 LED를 켠다.
+```cpp
+const int LED=25, BUTTON=18;
+void setup(){ pinMode(LED,OUTPUT); pinMode(BUTTON,INPUT_PULLUP); }
+void loop(){ digitalWrite(LED,digitalRead(BUTTON)==LOW ? HIGH:LOW); }
+```
+- LED: GPIO25 → 220~330Ω 직렬 저항 → LED(+), LED(-) → GND
+- 버튼: GPIO18 → 버튼 반대 접점 → GND. 내부 풀업이 3.3V에 연결해 주므로 놓았을 때 HIGH, 눌렀을 때 LOW
+- 바운스: 접점 떨림이 여러 입력으로 보이므로 25ms 정도 상태 안정 확인
 
-## 디지털 입력: INPUT_PULLUP
-`pinMode(18, INPUT_PULLUP);` 연결은 **GPIO18 → 버튼 → GND**이다. 버튼을 놓으면 HIGH, 누르면 LOW. 택트 스위치 같은 쪽의 두 다리는 내부적으로 연결되어 있을 수 있으므로 반대쪽 단자끼리 사용한다. 물리적인 10~30ms 바운스를 시간 기반으로 제거한다.
+## 4. ADC 원리
+ADC는 연속 아날로그 전압을 숫자로 바꾼다. 12비트 코드는 0~4095 (2^12=4096 단계).
+- 가변저항 10kΩ 양끝을 3V3/GND, 가운데를 GPIO34(ADC1_CH6)로 연결.
+- ADC1은 Wi-Fi 사용 시 ADC2 경합 문제를 피하기 좋다.
+- ADC 값이 전압과 완전히 비례하지는 않는다. ESP32 11dB 감쇠의 공식 권장 측정 범위는 약 150~3100mV; 단순히 4095=3.3V라고 단정하지 않는다.
+```cpp
+const int POT=34;
+void setup(){Serial.begin(115200);analogReadResolution(12);analogSetPinAttenuation(POT,ADC_ATTEN_DB_11);}
+void loop(){Serial.println(analogRead(POT));delay(100);}
+```
 
-## ADC(아날로그→디지털)
-`analogRead(34)` 는 ESP32 Arduino 기본 12비트 설정에서 대개 0~4095를 반환한다. **측정 가능한 실제 전압 범위는 감쇠 설정·칩 특성과 보정에 영향**을 받는다. 학습에서는 가변저항의 3V3/가운데/GND를 연결해 상대적인 변화를 관찰한다. `analogReadResolution(12)`, `analogSetPinAttenuation(34, ADC_11db)`로 설정하고, 0V·중간·3.3V 근처의 실제 로그는 보드에서 확인한다. 최대 근처 값의 정밀도를 단정하지 않는다.
+## 5. PWM 원리
+PWM은 HIGH와 LOW를 빠르게 반복하면서 HIGH 비율(듀티비)을 조절하는 출력 방식.
+- 듀티비 = HIGH 지속시간 / 한 주기 ×100%
+- 8비트 0=0%, 128≈50%, 255≈100%. LED 밝기 및 수동부저 주파수 제어.
+- ESP32의 LEDC 주변장치를 사용. Arduino-ESP32 3.x API의 예:
+```cpp
+const int LED=25;
+void setup(){ledcAttach(LED,5000,8);}
+void loop(){ledcWrite(LED,64);delay(1000);ledcWrite(LED,192);delay(1000);}
+```
 
-## PWM
-`analogWrite(25, duty)` 에 0~255의 duty를 쓰면 LED 밝기가 달라진다. 디지털 출력처럼 저항 220~330Ω을 직렬로 유지한다.
+## 6. 핀맵 구조
+공식 DevKitC V4는 좌우 헤더 **J2와 J3**로 구분한다. IO34를 코드에서 `34`로 쓰며, 물리 헤더 위치와 GPIO 번호를 혼동하지 않는다.
 
-## 논블로킹 상태기계
-`delay(1000)`을 호출하면 그 시간 동안 다른 버튼 입력을 신속히 확인할 수 없다. `millis()`와 `now-last >= period` 조건을 사용하면 LED 점멸, 버튼 확인, ADC 관찰을 동시에 진행할 수 있다. ISR 안에서는 지연/시리얼 출력하지 않는다.
+| 핀 | 헤더 | 연결 부품 | 용도 |
+|---|---|---|---|
+| GPIO18 | J3 | 버튼1→GND | INPUT_PULLUP RUN |
+| GPIO19 | J3 | 버튼2→GND | INPUT_PULLUP MODE |
+| GPIO25 | J2 | 220~330Ω→LED1(+) | PWM 출력 |
+| GPIO26 | J2 | 220~330Ω→LED2(+) | LED 출력 |
+| GPIO34 | J2 | 가변저항 가운데 | ADC1_CH6 입력 전용 |
+| GPIO27 | J2 | 적정 드라이버/저전류 부저 | PWM/톤 |
+| 3V3 | J2 | 가변저항 양끝 중 하나 | 전원 |
+| GND | J2/J3 | 가변저항, LED(-), 버튼 반대편, 부저(-) | 공통 접지 |
 
-## 참고
-https://docs.espressif.com/projects/esp-dev-kits/en/latest/esp32/esp32-devkitc/user_guide.html
+주의 핀: GPIO6~11은 플래시, GPIO0/2/5/12/15는 부팅 스트래핑, GPIO1/3은 UART0. GPIO34~39는 출력 불가/내부 풀업 없음. GPIO16/17은 WROVER 모듈에서 내부 사용일 수 있음.
+
+## 7. 필수 부품과 동작원리
+| 부품 | 수량(복합 워크북) | 기능 |
+|---|---:|---|
+| ESP32-DevKitC V4 + Micro-USB 데이터 케이블 | 각 1 | MCU, 전원, 업로드 |
+| 브레드보드·점퍼선 | 1·여러개 | 납땜 없는 공통 배선 |
+| LED | 2 | 전류 통과 시 발광(극성 있음) |
+| 220~330Ω 저항 | 2 | 각 LED 전류 제한 |
+| 택트 버튼 | 2 | 누를 때 두 접점을 연결 |
+| 가변저항 약 10kΩ | 1 | 분압으로 아날로그 입력 생성 |
+| 3.3V 호환 저전류 수동부저 | 1 | PWM에 따른 소리 출력(전류 확인) |
+선택 확장: DHT11 및 NeoPixel은 이번 주차 필수 회로에서 제외. 사용 시 신호전압, 전원용량 확인.
+
+## 8. 전원·결선 안전
+1. 보드 전원은 **USB, 5V+GND 헤더, 3V3+GND 헤더 중 한 가지만** 사용.
+2. 모든 ESP32 GPIO는 3.3V 로직; 5V를 입력에 인가하지 않는다.
+3. LED마다 전류제한 저항 필수, 극성 확인.
+4. 전원을 제거한 상태에서 결선하고 GND 공통 확인.
+5. 가변저항 가운데를 GPIO34에 연결하고 양끝은 3V3/GND.
+6. 택트 스위치 동일측 두 다리의 내부 연결 여부 확인.
+7. 수동부저 단품의 소비전류가 크면 트랜지스터 구동회로 필수.
+8. GPIO와 외부 5V 센서·릴레이·모터를 직접 연결하지 않는다.
+
+## 9. 이해도 점검
+1. GPIO 입력과 출력은 어떻게 다른가?
+2. UNO R3의 5V 핀 신호가 ESP32 GPIO에 위험한 이유는?
+3. GPIO34에 LED를 연결해도 점등할 수 없는 이유는?
+4. 12비트 ADC 4095는 어떤 숫자인가? 정확히 3.3V를 뜻하는가?
+5. PWM 25%의 의미는 무엇인가?
+6. `INPUT_PULLUP` 버튼은 눌렀을 때 HIGH인가 LOW인가?
+7. 왜 LED에 직렬 저항이 필요한가?
+8. ADC 측정과 PWM 출력의 역할을 순서대로 설명해 보라.
+
+## 참고 공식 자료
+- https://docs.espressif.com/projects/esp-dev-kits/en/latest/esp32/esp32-devkitc/user_guide.html
+- https://docs.espressif.com/projects/arduino-esp32/en/latest/api/gpio.html
+- https://docs.espressif.com/projects/arduino-esp32/en/latest/api/adc.html
+- https://docs.espressif.com/projects/arduino-esp32/en/latest/api/ledc.html
+- https://docs.arduino.cc/hardware/uno-rev3/
+- https://machinejw.tistory.com/21
