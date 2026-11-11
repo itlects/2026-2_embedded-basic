@@ -70,11 +70,11 @@ void updateReading(uint32_t now) {
   for (int i = 0; i < filled; i++) { avgT += temps[i]; avgH += hums[i]; }
   avgT /= filled;
   avgH /= filled;
-  if (state != AlarmState::WARNING && (avgT >= TEMP_ON || avgH >= HUM_ON))
+  // 오류 상태에서 정상 측정이 들어오면 먼저 NORMAL로 복귀한 뒤 같은 기준으로 다시 판단
+  if (state == AlarmState::SENSOR_ERROR) state = AlarmState::NORMAL;
+  if (state == AlarmState::NORMAL && (avgT >= TEMP_ON || avgH >= HUM_ON))
     state = AlarmState::WARNING;
   else if (state == AlarmState::WARNING && avgT <= TEMP_OFF && avgH <= HUM_OFF)
-    state = AlarmState::NORMAL;
-  else if (state == AlarmState::SENSOR_ERROR)
     state = AlarmState::NORMAL;
   Serial.printf("%lu,%.1f,%.1f,%.2f,%.2f,%s,%d\n",
                 (unsigned long)now, t, h, avgT, avgH, stateName(state), errors);

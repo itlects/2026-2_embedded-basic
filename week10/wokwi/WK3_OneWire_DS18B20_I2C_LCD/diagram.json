@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "author": "itlects - 2026-2 Embedded Basic Week10",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "board-esp32-devkit-c-v4", "id": "esp", "top": 0, "left": 0, "attrs": {} },
+    { "type": "wokwi-ds18b20", "id": "ds1", "top": -100, "left": 230, "attrs": { "temperature": "22.5", "deviceID": "0A1B2C3D4E01" } },
+    { "type": "wokwi-ds18b20", "id": "ds2", "top": -100, "left": 330, "attrs": { "temperature": "28.0", "deviceID": "0A1B2C3D4E02" } },
+    { "type": "wokwi-resistor", "id": "r_ow", "top": -150, "left": 140, "attrs": { "value": "4700" } },
+    { "type": "wokwi-dht22", "id": "dht1", "top": -100, "left": -150, "attrs": { "temperature": "24", "humidity": "45" } },
+    { "type": "wokwi-lcd1602", "id": "lcd1", "top": 140, "left": 200, "attrs": { "pins": "i2c" } }
+  ],
+  "connections": [
+    [ "esp:TX", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX", "$serialMonitor:TX", "", [] ],
+    [ "ds1:VCC", "esp:3V3", "red", [] ],
+    [ "ds2:VCC", "esp:3V3", "red", [] ],
+    [ "ds1:GND", "esp:GND.1", "black", [] ],
+    [ "ds2:GND", "esp:GND.1", "black", [] ],
+    [ "ds1:DQ", "esp:13", "violet", [] ],
+    [ "ds2:DQ", "esp:13", "violet", [] ],
+    [ "r_ow:1", "esp:3V3", "red", [] ],
+    [ "r_ow:2", "esp:13", "violet", [] ],
+    [ "dht1:VCC", "esp:3V3", "red", [] ],
+    [ "dht1:GND", "esp:GND.1", "black", [] ],
+    [ "dht1:SDA", "esp:4", "gold", [] ],
+    [ "lcd1:VCC", "esp:5V", "red", [] ],
+    [ "lcd1:GND", "esp:GND.1", "black", [] ],
+    [ "lcd1:SDA", "esp:21", "green", [] ],
+    [ "lcd1:SCL", "esp:22", "blue", [] ]
+  ],
+  "dependencies": {}
+}

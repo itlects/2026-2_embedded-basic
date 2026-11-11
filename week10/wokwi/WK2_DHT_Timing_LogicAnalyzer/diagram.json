@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "author": "itlects - 2026-2 Embedded Basic Week10",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "board-esp32-devkit-c-v4", "id": "esp", "top": 0, "left": 0, "attrs": {} },
+    { "type": "wokwi-dht22", "id": "dht1", "top": -86.1, "left": 196.2, "attrs": { "temperature": "24", "humidity": "53" } },
+    { "type": "wokwi-resistor", "id": "r_pu", "top": -110, "left": 120, "attrs": { "value": "10000" } },
+    { "type": "wokwi-logic-analyzer", "id": "la1", "top": 120, "left": 260, "attrs": { "bufferSize": "1000000", "filename": "dht22-timing", "triggerMode": "edge", "triggerPin": "D0" } }
+  ],
+  "connections": [
+    [ "esp:TX", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX", "$serialMonitor:TX", "", [] ],
+    [ "dht1:VCC", "esp:3V3", "red", [] ],
+    [ "dht1:GND", "esp:GND.1", "black", [] ],
+    [ "dht1:SDA", "esp:4", "gold", [] ],
+    [ "r_pu:1", "esp:3V3", "red", [] ],
+    [ "r_pu:2", "dht1:SDA", "gold", [] ],
+    [ "la1:D0", "esp:4", "gold", [] ],
+    [ "la1:D1", "esp:13", "cyan", [] ],
+    [ "la1:GND", "esp:GND.1", "black", [] ]
+  ],
+  "dependencies": {}
+}

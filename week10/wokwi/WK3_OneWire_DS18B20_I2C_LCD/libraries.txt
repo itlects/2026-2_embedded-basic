@@ -1,0 +1,5 @@
+# Wokwi 워크북 C
+OneWire
+DallasTemperature
+LiquidCrystal I2C
+DHT sensor library for ESPx

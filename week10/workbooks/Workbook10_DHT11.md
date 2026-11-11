@@ -32,3 +32,10 @@ GPIO26→330Ω→LED 애노드, LED 캐소드→GND. [연결도](../diagrams/03_
 5. 읽기 실패 시 경보 출력이 꺼져야 하는 이유는?
 
 **실물 보드 실행 검증은 아직 수행하지 않음.**
+
+## 추가: 실체 배선도와 Wokwi 시뮬레이션 워크북
+
+- 실습별 실체 배선도(실제 J2/J3 핀 위치): `../images/ex1_dht11_wiring_ko.png`, `ex2_dht11_buzzer_wiring_ko.png`, `ex3_dht11_buzzer_led_wiring_ko.png`
+- 회로도: `../images/ex1_dht11_schematic_ko.png`, `ex3_dht11_buzzer_led_schematic_ko.png`
+- 실습 5(이론 확인): `../examples/05_DHT_Raw_Timing_Decoder.ino` — 라이브러리 없이 40비트를 직접 해독
+- Wokwi 워크북 A·B·C: `../wokwi/README.md` (DHT22 경보 / 로직 분석기 타이밍 / 1-Wire DS18B20 + I²C LCD)

@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "author": "itlects - 2026-2 Embedded Basic Week10",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "board-esp32-devkit-c-v4", "id": "esp", "top": 0, "left": 0, "attrs": {} },
+    { "type": "wokwi-dht22", "id": "dht1", "top": -86.1, "left": 196.2, "attrs": { "temperature": "24", "humidity": "45" } },
+    { "type": "wokwi-resistor", "id": "r_pu", "top": -110, "left": 120, "rotate": 0, "attrs": { "value": "10000" } },
+    { "type": "wokwi-buzzer", "id": "bz1", "top": 60, "left": 280, "attrs": { "volume": "0.2" } },
+    { "type": "wokwi-resistor", "id": "r1", "top": 175, "left": 200, "attrs": { "value": "330" } },
+    { "type": "wokwi-led", "id": "led1", "top": 140, "left": 300, "attrs": { "color": "red" } }
+  ],
+  "connections": [
+    [ "esp:TX", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX", "$serialMonitor:TX", "", [] ],
+    [ "dht1:VCC", "esp:3V3", "red", [] ],
+    [ "dht1:GND", "esp:GND.1", "black", [] ],
+    [ "dht1:SDA", "esp:4", "gold", [] ],
+    [ "r_pu:1", "esp:3V3", "red", [] ],
+    [ "r_pu:2", "dht1:SDA", "gold", [] ],
+    [ "bz1:2", "esp:25", "purple", [] ],
+    [ "bz1:1", "esp:GND.1", "black", [] ],
+    [ "esp:26", "r1:1", "green", [] ],
+    [ "r1:2", "led1:A", "green", [] ],
+    [ "led1:C", "esp:GND.1", "black", [] ]
+  ],
+  "dependencies": {}
+}
