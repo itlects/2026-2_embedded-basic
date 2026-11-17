@@ -1,6 +1,6 @@
 # 12주차 · ESP32 Wi-Fi IoT 실습
 
-대상: 동서울대학교 IT융합학과 2학년 / 3시간 / ESP32 DevKitC V4.
+대상: 동서울대학교 IT융합학과 2학년 / 3시간 / ESP32 DevKitC V4 / 학생 PC: Windows 11 Home.
 
 1. docs/lecture.md에서 이론을 읽습니다. docs/physical_wiring.md에서 실제 배선과 센서 단독 확인을 진행합니다.
 2. docs/workbook1.md: 스캔 → SoftAP 웹서버 → 모바일 센서 확인·LED 제어.

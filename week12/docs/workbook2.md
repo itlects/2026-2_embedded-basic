@@ -1,3 +1,17 @@
+## Windows 11 Home 공통 실습 환경
+
+학생 PC의 OS는 모두 **Windows 11 Home**을 기준으로 합니다. Arduino IDE 2.x, Python 3.13, 선택 MySQL Community Server 8.0.46/Workbench 8을 사용합니다.
+
+1. ZIP 파일을 우클릭 → 모두 압축 풀기로 풉니다. ZIP 안에서 파일을 직접 실행하지 않습니다.
+2. 파일 탐색기에서 `week12` 폴더를 열고 주소 표시줄에 `powershell`을 입력해 Enter를 누릅니다. 서버 실행은 일반 권한 PowerShell에서 진행합니다.
+3. `py -3.13 --version`을 확인합니다. `py`가 없으면 `python --version`으로 3.13인지 확인하고, 맞을 때만 이후 명령의 `py -3.13`을 `python`으로 바꿉니다. 둘 다 실행되지 않으면 Python 설치와 실행 경로부터 확인합니다.
+4. 장치 관리자의 포트(COM 및 LPT)에서 ESP32의 COM 번호를 확인합니다. 포트가 없으면 데이터 USB 케이블과 보드 USB-UART 칩에 맞는 드라이버를 확인합니다.
+5. 신뢰하는 실습용 Wi-Fi에서는 설정 → 네트워크 및 인터넷 → Wi-Fi → 연결한 네트워크 속성에서 네트워크 프로필을 개인으로 설정합니다. 공용 Wi-Fi를 임의로 개인으로 바꾸지 않습니다.
+6. PC 서버 방화벽 설정은 Windows 보안 → 방화벽 및 네트워크 보호에서 확인합니다. 아래 `New-NetFirewallRule` 명령은 Windows 11 Home에서도 사용할 수 있으며 관리자 PowerShell에서 한 번만 실행합니다. 일반 서버 실행에는 관리자 권한이 필요하지 않습니다. 관리자 계정이 없으면 교수자에게 해당 PC의 규칙 설정을 요청합니다.
+7. 모바일은 `http://PC의_IPv4:8000`에 접속합니다. Windows Home이라는 이유로 별도 서버 OS가 필요한 실습은 아닙니다.
+
+[Microsoft 방화벽 공식 안내](https://support.microsoft.com/en-gb/windows/security/windows-security/firewall-and-network-protection-in-the-windows-security-app)
+
 # 워크북 2 · PC 실시간 수집·모바일 관제·선택 MySQL
 
 예상 70분 + 선택 확장. 완료 목표: HTTP POST 수신, CSV 저장, 모바일 조회 및 LED 명령 적용.
