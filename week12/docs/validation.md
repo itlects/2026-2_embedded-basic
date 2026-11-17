@@ -1,19 +1,42 @@
-# 검증 기록 (2026-11-18)
+# 검증 기록 · 2026-11-18 보완판
 
-- PC 서버 Python 구문 검사 통과(실행 환경 Python 3.12.14, 배포 목표 Python 3.13 표준 라이브러리 사용).
-- 실제 로컬 HTTP 서버 대상으로 5개 테스트 통과: 센서값 수신·CSV·최신값, 장치별 LED 명령, 잘못된 숫자/범위/장치 ID, 화면·404, 저장 실패 503.
-- 배선도와 회로도 이미지 렌더링 및 육안 확인 완료. 실제 보유 모듈의 핀 순서는 수업 현장에서 확인 필요.
-- ESP32 스케치의 API 사용·핀·JSON·측정 주기·HTTP 종료·타임아웃을 코드 검토함.
-- Arduino CLI는 확보했으나 ESP32 보드 패키지 인덱스 다운로드가 실행 환경 네트워크 제한으로 실패하여 실제 ESP32 타깃 컴파일을 완료하지 못함. 컴파일 완료로 간주하지 않음.
-- 실물 ESP32/DHT11/모바일 Wi-Fi 및 MySQL 8.0.46 연결은 이 환경에 없어 미검증. Python 3.13 실기 실행도 수업 PC에서 확인 필요.
+## 실제 ESP32 타깃 컴파일
 
-## 교수자 수업 전 최종 확인
+Arduino CLI 1.6.0 / Arduino-ESP32 3.3.2 / FQBN esp32:esp32:esp32 / DHT sensor library 1.4.6 / Adafruit Unified Sensor 1.1.15.
 
-1. Arduino IDE에서 각 .ino 3개를 ESP32 Dev Module 대상으로 확인(컴파일)한다.
-2. 보유 DHT11 모듈의 3.3V 지원·핀 라벨·풀업을 확인한다.
-3. AP 예제 업로드 → 모바일 접속 → 온습도·LED 확인.
-4. PC 서버 실행 → client 예제 업로드 → POST 201·CSV·모바일·LED 확인.
-5. 선택 DB 활성화 → SELECT 결과·DB 중단 시 503 확인.
-6. 각 PC의 ESP32 패키지·라이브러리 버전을 기록한다.
+|스케치|결과|Flash 사용|RAM 사용|
+|---|---|---|---|
+|00_dht_check|통과|283295 bytes|20792 bytes|
+|01_scan|통과|883759 bytes|43360 bytes|
+|02_mobile_ap|통과|937247 bytes|45056 bytes|
+|03_pc_client|통과|941463 bytes|46024 bytes|
 
-자동 서버 테스트 재실행: `py -3.13 server/test_server.py`
+`verification/compile_*.txt`에 컴파일 요약을 포함한다. 정적 검토만 한 것이 아니라 ESP32용 컴파일러로 바이너리 링크까지 완료했다. 초기 시도에서 다운로드·디스크 공간 제약이 있었으나 classic ESP32 빌드에 필요한 패키지를 설치해 검증을 완료했다.
+
+## PC 및 자료 검증
+
+- Python 3.12.14에서 HTTP 실제 요청 기반 서버 테스트 5종 재통과: 수신·CSV·최신값, 장치별 명령, 입력 오류, 화면/404, 저장 실패 503.
+- PC dashboard 및 ESP32 내장 페이지의 JavaScript 구문 검사 통과.
+- GitHub 원본과 Notion 워크북의 기존 코드 대조 후 수정 코드를 동기화했다.
+- 새 배선도를 렌더링하고 GPIO27/26, a6/a7/a8, 저항 e16-e20, LED b20/b21, 공통 GND의 연결을 검토했다.
+
+## 미검증 범위와 현장 확인
+
+실물 ESP32·DHT11의 전기적 동작, 모바일 Wi-Fi 접속, MySQL Community 8.0.46 연결은 이 환경에 없어 실물 실행을 완료하지 못했다. Python 3.13에서는 수업 PC에서 아래 명령으로 확인한다. 컴파일 성공이 센서 핀 순서·접촉 불량·공유기 격리·DB 계정까지 보장하지는 않는다.
+
+```powershell
+py -3.13 server/test_server.py
+```
+
+1. 보유 모듈의 VCC/DATA/GND와 3.3V 지원·풀업을 확인한다.
+2. 00_dht_check의 온습도 3회 → AP 모바일 접속·LED → PC POST 201·CSV 순서로 확인한다.
+3. 선택 MySQL 활성화 후 SELECT에 새 행이 생기는지 확인한다.
+
+## 재컴파일 명령
+
+```text
+arduino-cli compile --fqbn esp32:esp32:esp32 week12/firmware/00_dht_check
+arduino-cli compile --fqbn esp32:esp32:esp32 week12/firmware/01_scan
+arduino-cli compile --fqbn esp32:esp32:esp32 week12/firmware/02_mobile_ap
+arduino-cli compile --fqbn esp32:esp32:esp32 week12/firmware/03_pc_client
+```

@@ -21,7 +21,7 @@
 
 ## 3. 환경과 사전 준비
 
-Windows 10/11, Arduino IDE 2.x, ESP32 by Espressif Systems 3.x, 보드 ESP32 Dev Module, Python 3.13, 선택 MySQL Community Server 8.0.46/Workbench 8. 보드 패키지의 실제 설치 버전은 결과보고에 기록한다. 기본 UART 115200, 업로드 속도 문제 시 115200으로 낮춘다.
+Windows 10/11, Arduino IDE 2.x, ESP32 by Espressif Systems 3.3.2 (이번 검증 버전), 보드 ESP32 Dev Module, Python 3.13, 선택 MySQL Community Server 8.0.46/Workbench 8. 보드 패키지의 실제 설치 버전은 결과보고에 기록한다. 기본 UART 115200, 업로드 속도 문제 시 115200으로 낮춘다.
 
 Arduino IDE 파일 → 기본 설정 → 추가 보드 관리자 URL에 다음 공식 stable 주소를 등록한다.
 
@@ -86,7 +86,7 @@ DHT11은 내부 온도·습도 감지와 디지털 변환 회로가 측정값을
 |GPIO26|330Ω → LED A|J2-10|
 |GND|DHT11 GND, LED K|J2-14|
 
-그림은 기능 핀 중심 배선도이다. 실물 실크 인쇄와 공식 핀맵을 함께 확인한다. 3핀 모듈의 핀 순서는 제조사별로 다르다. DHT11 모듈은 3.3V 동작 지원 제품을 사용하고, 5V 전용 모듈은 그대로 연결하지 않는다. 단품은 데이터시트를 확인해 3.3V 동작 가능 여부와 풀업을 확인한다. GPIO에 5V를 입력하지 않는다. USB·5V 헤더·3V3 헤더로 동시에 전원을 넣지 않는다. 참고 블로그의 5V 핀에 12V를 넣는 설명은 따라 하지 않는다. 공식 가이드의 5V 기준을 따른다.
+보완한 배선도는 38핀 보드와 브레드보드 구멍 좌표를 함께 표시한다. 실물 실크 인쇄와 공식 핀맵을 함께 확인한다. 3핀 모듈의 핀 순서는 제조사별로 다르다. DHT11 모듈은 3.3V 동작 지원 제품을 사용하고, 5V 전용 모듈은 그대로 연결하지 않는다. 단품은 데이터시트를 확인해 3.3V 동작 가능 여부와 풀업을 확인한다. GPIO에 5V를 입력하지 않는다. USB·5V 헤더·3V3 헤더로 동시에 전원을 넣지 않는다. 참고 블로그의 5V 핀에 12V를 넣는 설명은 따라 하지 않는다. 공식 가이드의 5V 기준을 따른다.
 
 ![회로도](../images/00_schematic.png)
 
@@ -110,3 +110,9 @@ DHT11은 내부 온도·습도 감지와 디지털 변환 회로가 측정값을
 - https://docs.espressif.com/projects/arduino-esp32/en/latest/installing.html
 - https://github.com/adafruit/DHT-sensor-library
 - https://machinejw.tistory.com/21 (보드 외형 참고, 전원·설치 정보는 공식 자료 우선)
+
+## 실제 배선 그림
+
+![구멍 좌표 배선도](../images/02_ap_wiring.png)
+
+별도 physical_wiring.md의 좌표 표와 센서 단독 테스트부터 진행한다.

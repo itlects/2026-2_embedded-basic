@@ -1,5 +1,7 @@
 #include <WiFi.h>
 #include <DHT.h>
+#include <math.h>
+const char* DEVICE_ID = "team01";
 DHT dht(27, DHT11);
 const int LED_PIN = 26;
 float temperature = NAN, humidity = NAN;
@@ -12,7 +14,8 @@ void sampleSensor() {
 }
 String sensorJson() {
   if (isnan(temperature) || isnan(humidity)) return "{\"valid\":false}";
-  return "{\"valid\":true,\"device\":\"team01\",\"temperature\":" +
+  return String("{\"valid\":true,\"device\":\"") + DEVICE_ID +
+    "\",\"temperature\":" +
     String(temperature, 1) + ",\"humidity\":" + String(humidity, 1) + "}";
 }
 #include <WebServer.h>
@@ -38,7 +41,10 @@ void setup() {
   digitalWrite(LED_PIN, LOW);
   dht.begin();
   WiFi.mode(WIFI_AP);
-  WiFi.softAP("ESP32-Team01", "esp32wifi");
+  if (!WiFi.softAP("ESP32-Team01", "esp32wifi")) {
+    Serial.println("AP start failed");
+  }
+  Serial.print("AP IP: ");
   Serial.println(WiFi.softAPIP());
   server.on("/", HTTP_GET, [](){server.send(200,"text/html; charset=utf-8",PAGE);});
   server.on("/data", HTTP_GET, [](){server.send(200,"application/json",sensorJson());});

@@ -2,7 +2,7 @@
 
 대상: 동서울대학교 IT융합학과 2학년 / 3시간 / ESP32 DevKitC V4.
 
-1. docs/lecture.md에서 이론을 읽습니다.
+1. docs/lecture.md에서 이론을 읽습니다. docs/physical_wiring.md에서 실제 배선과 센서 단독 확인을 진행합니다.
 2. docs/workbook1.md: 스캔 → SoftAP 웹서버 → 모바일 센서 확인·LED 제어.
 3. docs/workbook2.md: STA → HTTP POST → PC 수집·모바일 관제 → 선택 MySQL 저장.
 
@@ -11,3 +11,5 @@ firmware의 각 폴더와 같은 이름의 .ino를 Arduino IDE에서 엽니다. 
 [지정 Notion 강의](https://app.notion.com/p/40db2e6bf8078082b031e7dec65ac171)
 
 검증 범위와 남은 실물 확인은 docs/validation.md에 기록합니다.
+
+검증 버전: Arduino-ESP32 3.3.2 / DHT 1.4.6 / Unified Sensor 1.1.15. 전체 4개 스케치 타깃 컴파일 통과. docs/learning_review.md에 학습 적합성 검토를 포함합니다.

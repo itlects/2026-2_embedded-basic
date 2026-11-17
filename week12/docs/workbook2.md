@@ -4,6 +4,45 @@
 
 ![연결도](../images/03_pc_wiring.png)
 
+## 실제 배선 위치 따라하기
+
+그림의 ESP32는 38핀 DevKitC V4이며 USB가 아래쪽입니다. 보드가 브레드보드 구멍을 가리지 않도록 바깥에 둡니다. 그림의 선이 지나가는 위치가 아닌 선 끝의 연결점을 꽂습니다. 3핀 DHT11은 그림의 VCC-DATA-GND 순서 제품 기준이며 보유 모듈의 인쇄 라벨이 우선입니다.
+
+|순서|한쪽 끝|다른 쪽 끝|확인|
+|---|---|---|---|
+|1|ESP32 GND|상단 − 전원 레일 1번 구멍|공통 접지|
+|2|ESP32 3V3|상단 + 전원 레일 1번 구멍|5V 핀 사용 금지|
+|3|DHT11 VCC / DATA / GND|a6 / a7 / a8|모듈 순서가 다르면 라벨대로 재배치|
+|4|상단 + 전원 레일 6번|e6|VCC에 3.3V|
+|5|상단 − 전원 레일 8번|e8|센서 접지|
+|6|ESP32 GPIO27|e7|센서 데이터|
+|7|ESP32 GPIO26|a16|LED 출력 시작|
+|8|330Ω 저항 양 끝|e16 / e20|열16과 열20 사이 연결|
+|9|LED A(긴 다리) / K(짧은 다리)|b20 / b21|서로 다른 열에 꽂기|
+|10|a21|상단 − 전원 레일 28번|LED 접지|
+
+a~e의 같은 번호 열은 내부로 연결되어 있습니다. f~j는 별도이며 중앙 홈을 건너 연결되지 않습니다. 모듈을 뽑은 상태에서 멀티미터 도통으로 a6-e6 연결, a6-a7 분리를 확인하면 이해에 도움이 됩니다. 전원 레일에 중간 단절이 있는 브레드보드는 사용 구간 도통을 확인합니다.
+
+## 단계별 통과 기준
+
+워크북 1의 센서 단독 확인이 성공한 회로를 그대로 사용합니다. 펌웨어를 PC 전송용으로 교체하므로 모바일은 ESP32-Team01에서 나와 PC와 같은 공유기 Wi-Fi에 접속해야 합니다.
+
+|단계|실행|정상 결과|실패하면|
+|---|---|---|---|
+|1|PC 서버·샘플 재생|PC 화면에 team01 샘플값|Python·폴더 경로 확인|
+|2|모바일에서 PC 주소 접속|수신 대기 또는 샘플값|방화벽·LAN 주소 확인|
+|3|ESP32 펌웨어 업로드|STA IP와 POST: 201|SSID·암호·BASE_URL 확인|
+|4|LED 명령|3초 안팎 후 실물 변화|DEVICE_ID·GPIO26 확인|
+|5|선택 DB|SELECT에 새 행|계정·테이블·503 로그 확인|
+
+전송 본문 예시는 아래와 같습니다. 서버가 받은 시각을 추가하므로 장치 시계 동기화는 필요 없습니다.
+
+```json
+{"valid":true,"device":"team01","temperature":24.0,"humidity":52.0}
+```
+
+`POST: 201`은 서버 수신·저장 처리 성공을 뜻합니다. PC의 샘플값을 본 것과 실제 ESP32의 측정값을 본 것을 구별하려면 샘플 재생 종료 후 서버 재시작 → 손을 센서 가까이 가져가기 → 수신값 변화·시리얼 로그·CSV 새 행을 함께 확인합니다.
+
 ## 공통 연결 순서
 
 1. USB를 뽑는다. ESP32 실크의 3V3, GND, 27, 26을 찾는다.
@@ -58,7 +97,7 @@ New-NetFirewallRule -DisplayName "Embedded12 HTTP" -Direction Inbound -Action Al
 
 1. `firmware/03_pc_client/03_pc_client.ino`를 연다.
 2. SSID/PASSWORD를 실제 2.4GHz 공유기 정보로 바꾼다. BASE_URL의 IPv4를 위에서 확인한 PC 주소로 바꾼다.
-3. 여러 팀은 `sensorJson()`의 `team01`과 `/api/led?device=team01`을 같은 팀 ID로 함께 변경한다. 모바일 장치 칸에도 동일 ID를 입력한다.
+3. 여러 팀은 상단의 `DEVICE_ID = "team01"` 한 곳을 팀 ID로 변경한다. 모바일 장치 칸에도 동일 ID를 입력한다.
 4. 업로드 후 시리얼 115200으로 `POST: 201`을 확인한다. 음수는 연결 오류, 503은 저장 오류이다.
 5. PC 터미널에 POST 요청이 3초마다 보이는지 확인한다. 모바일에서 온습도·수신 시각·경과 시간을 확인한다. 시각은 UTC이고 한국 시간은 +9시간이다.
 6. 모바일 LED 버튼을 누른다. ESP32가 약 3초 주기로 명령을 조회하므로 잠시 기다린 후 실물을 확인한다.
@@ -121,6 +160,8 @@ SELECT * FROM readings ORDER BY id DESC LIMIT 20;
 ```cpp
 #include <WiFi.h>
 #include <DHT.h>
+#include <math.h>
+const char* DEVICE_ID = "team01";
 DHT dht(27, DHT11);
 const int LED_PIN = 26;
 float temperature = NAN, humidity = NAN;
@@ -133,7 +174,8 @@ void sampleSensor() {
 }
 String sensorJson() {
   if (isnan(temperature) || isnan(humidity)) return "{\"valid\":false}";
-  return "{\"valid\":true,\"device\":\"team01\",\"temperature\":" +
+  return String("{\"valid\":true,\"device\":\"") + DEVICE_ID +
+    "\",\"temperature\":" +
     String(temperature, 1) + ",\"humidity\":" + String(humidity, 1) + "}";
 }
 #include <HTTPClient.h>
@@ -141,6 +183,7 @@ const char* SSID = "YOUR_2G_WIFI";
 const char* PASSWORD = "YOUR_WIFI_PASSWORD";
 const char* BASE_URL = "http://192.168.0.10:8000"; // PC IPv4로 수정
 unsigned long lastSend = 0, lastReconnect = 0;
+bool wasConnected = false;
 void setup() {
   Serial.begin(115200);
   pinMode(LED_PIN, OUTPUT);
@@ -148,15 +191,23 @@ void setup() {
   dht.begin();
   WiFi.mode(WIFI_STA);
   WiFi.begin(SSID, PASSWORD);
+  Serial.println("Connecting to Wi-Fi...");
 }
 void loop() {
   sampleSensor();
   if (WiFi.status() != WL_CONNECTED) {
+    wasConnected = false;
     if (millis() - lastReconnect >= 10000) {
       lastReconnect = millis();
+      Serial.println("Wi-Fi disconnected; retrying...");
       WiFi.reconnect();
     }
     return;
+  }
+  if (!wasConnected) {
+    wasConnected = true;
+    Serial.print("STA IP: ");
+    Serial.println(WiFi.localIP());
   }
   if (millis() - lastSend < 3000) return;
   lastSend = millis();
@@ -170,8 +221,10 @@ void loop() {
     int code = http.POST(sensorJson());
     Serial.printf("POST: %d\n", code);
     http.end();
+  } else {
+    Serial.println("DHT read failed: check power/DATA/pull-up");
   }
-  http.begin(client, String(BASE_URL) + "/api/led?device=team01");
+  http.begin(client, String(BASE_URL) + "/api/led?device=" + DEVICE_ID);
   int code = http.GET();
   if (code == 200) {
     String body = http.getString();
@@ -331,3 +384,7 @@ CREATE TABLE IF NOT EXISTS readings (
 );
 SELECT * FROM readings ORDER BY id DESC LIMIT 20;
 ```
+
+## 검증 보완 결과
+
+Arduino-ESP32 3.3.2, DHT 1.4.6에서 예제 4종 ESP32 타깃 컴파일을 통과했습니다. PC 서버 테스트 5종과 JavaScript 구문 검사도 통과했습니다. 실물 Wi-Fi·센서·MySQL은 현장 확인이 필요합니다. 상세 로그는 verification 폴더, 검토는 docs/learning_review.md를 참고합니다.
