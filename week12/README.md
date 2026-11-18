@@ -9,3 +9,5 @@
 각 firmware 하위 폴더의 같은 이름 .ino 파일을 Arduino IDE에서 엽니다. 서버는 week12 폴더에서 `py -3.13 server/server.py`로 실행합니다.
 
 교수자 참고: docs/validation.md, docs/learning_review.md, verification/.
+
+4. docs/workbook3.md: LED 4·버튼 4·DHT11·수동 피에조 부저 Wi-Fi 통합 제어.

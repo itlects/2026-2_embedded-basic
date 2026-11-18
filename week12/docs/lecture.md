@@ -56,3 +56,7 @@ https://espressif.github.io/arduino-esp32/package_esp32_index.json
 ## 제출
 
 배선 사진 1장, 모바일 화면 1장, `POST: 201` 시리얼 화면 1장을 제출합니다.
+
+## 추가 응용 실습
+
+워크북 3: DHT11·LED 4개·버튼 4개·수동 피에조 부저를 연결해 웹 제어와 멜로디 2곡을 실습합니다.

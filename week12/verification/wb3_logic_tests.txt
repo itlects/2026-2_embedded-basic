@@ -1,0 +1,8 @@
+PASS short press toggles on release
+PASS bounce rejected before 30ms stability
+PASS long press starts music without short press toggle
+PASS melody switch and stop
+PASS melody finishes automatically
+PASS button works while melody is playing
+PASS all off clears LEDs and tone
+PASS sensor scheduler
