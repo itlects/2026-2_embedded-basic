@@ -11,3 +11,7 @@
 교수자 참고: docs/validation.md, docs/learning_review.md, verification/.
 
 4. docs/workbook3.md: LED 4·버튼 4·DHT11·수동 피에조 부저 Wi-Fi 통합 제어.
+
+첫 예제: docs/wifi_hello.md / firmware/00_wifi_hello/00_wifi_hello.ino (센서 없이 Wi-Fi Hello World).
+
+두 번째 예제: docs/wifi_two_led.md / firmware/00_wifi_two_led/00_wifi_two_led.ino (모바일 LED 2개 제어).
