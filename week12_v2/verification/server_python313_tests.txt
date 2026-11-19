@@ -1,0 +1,26 @@
+WARN `--no-project` was provided, but no project was found
+test_bad_values (__main__.APITest.test_bad_values) ... 127.0.0.1 - - [19/Nov/2026 12:37:42] "POST /api/readings HTTP/1.1" 400 -
+127.0.0.1 - - [19/Nov/2026 12:37:42] "POST /api/readings HTTP/1.1" 400 -
+127.0.0.1 - - [19/Nov/2026 12:37:42] "POST /api/readings HTTP/1.1" 400 -
+127.0.0.1 - - [19/Nov/2026 12:37:42] "POST /api/readings HTTP/1.1" 400 -
+127.0.0.1 - - [19/Nov/2026 12:37:42] "POST /api/led HTTP/1.1" 400 -
+127.0.0.1 - - [19/Nov/2026 12:37:42] "POST /api/led HTTP/1.1" 400 -
+ok
+test_led (__main__.APITest.test_led) ... 127.0.0.1 - - [19/Nov/2026 12:37:42] "POST /api/led HTTP/1.1" 200 -
+127.0.0.1 - - [19/Nov/2026 12:37:42] "GET /api/led?device=team02 HTTP/1.1" 200 -
+127.0.0.1 - - [19/Nov/2026 12:37:42] "GET /api/led?device=other HTTP/1.1" 200 -
+ok
+test_routes (__main__.APITest.test_routes) ... 127.0.0.1 - - [19/Nov/2026 12:37:42] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [19/Nov/2026 12:37:42] "GET /missing HTTP/1.1" 404 -
+127.0.0.1 - - [19/Nov/2026 12:37:42] "GET /api/latest?device=new HTTP/1.1" 200 -
+ok
+test_storage_failure (__main__.APITest.test_storage_failure) ... 127.0.0.1 - - [19/Nov/2026 12:37:42] "POST /api/readings HTTP/1.1" 503 -
+ok
+test_valid_reading_csv (__main__.APITest.test_valid_reading_csv) ... 127.0.0.1 - - [19/Nov/2026 12:37:42] "POST /api/readings HTTP/1.1" 201 -
+127.0.0.1 - - [19/Nov/2026 12:37:42] "GET /api/latest?device=team01 HTTP/1.1" 200 -
+ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.559s
+
+OK

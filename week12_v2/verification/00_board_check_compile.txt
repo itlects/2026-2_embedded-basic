@@ -1,0 +1,2 @@
+Sketch uses 289043 bytes (9%) of program storage space. Maximum is 3145728 bytes.
+Global variables use 20684 bytes (6%) of dynamic memory, leaving 306996 bytes for local variables. Maximum is 327680 bytes.
