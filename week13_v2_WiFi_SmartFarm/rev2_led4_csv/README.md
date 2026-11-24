@@ -84,3 +84,7 @@ ESP32-S3 CAM은 별도 장치로 식물/화분 영상 감시를 추가할 수 �
 [학생 실습결과 제출 페이지](https://app.notion.com/p/13-422b2e6bf807807e81c5ea14ebef2b5a) — 작품 전체 사진 1장 및 예제/워크북 결과표 제출.
 
 PC 서버 로컬 테스트: HTML 200, POST 201, CSV 저장/조회 정상, 잘못된 LED mask 16 → 400. 실물 및 Wokwi 실행 미검증.
+
+## 실제 키트 및 브레드보드 배선
+
+[상세 배선표와 사진](docs/breadboard_wiring.md), [학생 제출 양식](docs/report_template.md).
