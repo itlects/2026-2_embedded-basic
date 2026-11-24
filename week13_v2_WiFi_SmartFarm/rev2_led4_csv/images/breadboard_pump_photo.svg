@@ -1,0 +1,414 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1500" height="1020" viewBox="0 0 1500 1020">
+<rect width="100%" height="100%" fill="#edf2f5"/>
+<g font-family="Arial,sans-serif" font-size="18" fill="#203040">
+<text x="30" y="42" font-size="30" fill="#203040">Actual kit photo + relay/pump breadboard connection</text>
+<text x="30" y="72" font-size="18" fill="#203040">Photo: supplied product image (cropped); pin labels shown schematically, verify your physical part.</text>
+<rect x="30" y="95" width="520" height="318" rx="8" fill="white" stroke="#536575" stroke-width="2"/>
+<image x="45" y="110" width="485" height="270" preserveAspectRatio="xMidYMid meet" xlink:href="data:image/jpeg;base64,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"/>
+<text x="52" y="400" font-size="18" fill="#203040">Actual probe / pump / relay kit</text>
+<rect x="590" y="100" width="875" height="310" rx="8" fill="white" stroke="#536575" stroke-width="2"/>
+<text x="610" y="135" font-size="23" fill="#203040">Pump power circuit (no breadboard motor current)</text>
+<rect x="615" y="190" width="215" height="140" rx="8" fill="#fff0e5" stroke="#536575" stroke-width="2"/>
+<text x="630" y="222" font-size="20" fill="#203040">DC power supply</text>
+<text x="630" y="254" font-size="18" fill="#203040">Pump-rated +</text>
+<text x="630" y="294" font-size="18" fill="#203040">Pump-rated −</text>
+<rect x="915" y="190" width="210" height="140" rx="8" fill="#dbe8f6" stroke="#536575" stroke-width="2"/>
+<text x="930" y="222" font-size="20" fill="#203040">Relay contacts</text>
+<text x="930" y="254" font-size="18" fill="#203040">COM     NO</text>
+<rect x="1210" y="190" width="220" height="140" rx="8" fill="#fff8db" stroke="#536575" stroke-width="2"/>
+<text x="1225" y="222" font-size="20" fill="#203040">Actual DC pump</text>
+<text x="1225" y="254" font-size="20" fill="#203040">+          −</text>
+<polyline points="830,250 870,250 870,245 915,245" stroke="#d72c35" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="842" y="231" width="47" height="20" rx="4" fill="#e6d1a5" stroke="#807556" stroke-width="2"/>
+<text x="837" y="224" font-size="14" fill="#203040">Fuse</text>
+<polyline points="1125,250 1210,250" stroke="#d72c35" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="1430,290 1440,290 1440,360 830,360 830,290" stroke="#273746" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="630" y="386" font-size="18" fill="#203040">Flyback diode across pump: stripe → +; anode → −. NO only, never NC.</text>
+<text x="35" y="470" font-size="22" fill="#203040">Logic side • breadboard transistor driver (only verified 5V active-LOW relay)</text>
+<rect x="35" y="505" width="235" height="370" rx="8" fill="#24505a" stroke="#536575" stroke-width="2"/>
+<rect x="75" y="525" width="160" height="95" rx="8" fill="#a5b3bf" stroke="#536575" stroke-width="2"/>
+<text x="87" y="563" font-size="23" fill="#203040">ESP32</text>
+<text x="87" y="590" font-size="17" fill="#203040">DevKitC V4</text>
+<text x="135" y="680" font-size="18" fill="white">GPIO23</text>
+<text x="135" y="750" font-size="18" fill="white">GND</text>
+<circle cx="265" cy="675" r="5" fill="#f5cf70"/>
+<circle cx="265" cy="745" r="5" fill="#f5cf70"/>
+<rect x="377" y="565" width="596" height="245" rx="14" fill="#fff" stroke="#a3aeb6" stroke-width="2"/>
+<rect x="390" y="699" width="568" height="20" rx="2" fill="#c5ced4" stroke="#c5ced4" stroke-width="2"/>
+<polyline points="395,581 928,581" stroke="#dc3340" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="395,599 928,599" stroke="#273746" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="385" y="586" font-size="13" fill="#dc3340">+</text>
+<text x="385" y="604" font-size="13" fill="#203040">−</text>
+<text x="401" y="618" font-size="10" fill="#203040">1</text>
+<circle cx="405" cy="631" r="4" fill="#9aa7af"/>
+<circle cx="405" cy="732" r="4" fill="#9aa7af"/>
+<circle cx="405" cy="647" r="4" fill="#9aa7af"/>
+<circle cx="405" cy="748" r="4" fill="#9aa7af"/>
+<circle cx="405" cy="663" r="4" fill="#9aa7af"/>
+<circle cx="405" cy="764" r="4" fill="#9aa7af"/>
+<circle cx="405" cy="679" r="4" fill="#9aa7af"/>
+<circle cx="405" cy="780" r="4" fill="#9aa7af"/>
+<circle cx="405" cy="695" r="4" fill="#9aa7af"/>
+<circle cx="405" cy="796" r="4" fill="#9aa7af"/>
+<circle cx="405" cy="581" r="3.7" fill="#c17274"/>
+<circle cx="405" cy="599" r="3.7" fill="#586a78"/>
+<text x="428" y="618" font-size="10" fill="#203040">2</text>
+<circle cx="432" cy="631" r="4" fill="#9aa7af"/>
+<circle cx="432" cy="732" r="4" fill="#9aa7af"/>
+<circle cx="432" cy="647" r="4" fill="#9aa7af"/>
+<circle cx="432" cy="748" r="4" fill="#9aa7af"/>
+<circle cx="432" cy="663" r="4" fill="#9aa7af"/>
+<circle cx="432" cy="764" r="4" fill="#9aa7af"/>
+<circle cx="432" cy="679" r="4" fill="#9aa7af"/>
+<circle cx="432" cy="780" r="4" fill="#9aa7af"/>
+<circle cx="432" cy="695" r="4" fill="#9aa7af"/>
+<circle cx="432" cy="796" r="4" fill="#9aa7af"/>
+<circle cx="432" cy="581" r="3.7" fill="#c17274"/>
+<circle cx="432" cy="599" r="3.7" fill="#586a78"/>
+<text x="455" y="618" font-size="10" fill="#203040">3</text>
+<circle cx="459" cy="631" r="4" fill="#9aa7af"/>
+<circle cx="459" cy="732" r="4" fill="#9aa7af"/>
+<circle cx="459" cy="647" r="4" fill="#9aa7af"/>
+<circle cx="459" cy="748" r="4" fill="#9aa7af"/>
+<circle cx="459" cy="663" r="4" fill="#9aa7af"/>
+<circle cx="459" cy="764" r="4" fill="#9aa7af"/>
+<circle cx="459" cy="679" r="4" fill="#9aa7af"/>
+<circle cx="459" cy="780" r="4" fill="#9aa7af"/>
+<circle cx="459" cy="695" r="4" fill="#9aa7af"/>
+<circle cx="459" cy="796" r="4" fill="#9aa7af"/>
+<circle cx="459" cy="581" r="3.7" fill="#c17274"/>
+<circle cx="459" cy="599" r="3.7" fill="#586a78"/>
+<text x="482" y="618" font-size="10" fill="#203040">4</text>
+<circle cx="486" cy="631" r="4" fill="#9aa7af"/>
+<circle cx="486" cy="732" r="4" fill="#9aa7af"/>
+<circle cx="486" cy="647" r="4" fill="#9aa7af"/>
+<circle cx="486" cy="748" r="4" fill="#9aa7af"/>
+<circle cx="486" cy="663" r="4" fill="#9aa7af"/>
+<circle cx="486" cy="764" r="4" fill="#9aa7af"/>
+<circle cx="486" cy="679" r="4" fill="#9aa7af"/>
+<circle cx="486" cy="780" r="4" fill="#9aa7af"/>
+<circle cx="486" cy="695" r="4" fill="#9aa7af"/>
+<circle cx="486" cy="796" r="4" fill="#9aa7af"/>
+<circle cx="486" cy="581" r="3.7" fill="#c17274"/>
+<circle cx="486" cy="599" r="3.7" fill="#586a78"/>
+<text x="509" y="618" font-size="10" fill="#203040">5</text>
+<circle cx="513" cy="631" r="4" fill="#9aa7af"/>
+<circle cx="513" cy="732" r="4" fill="#9aa7af"/>
+<circle cx="513" cy="647" r="4" fill="#9aa7af"/>
+<circle cx="513" cy="748" r="4" fill="#9aa7af"/>
+<circle cx="513" cy="663" r="4" fill="#9aa7af"/>
+<circle cx="513" cy="764" r="4" fill="#9aa7af"/>
+<circle cx="513" cy="679" r="4" fill="#9aa7af"/>
+<circle cx="513" cy="780" r="4" fill="#9aa7af"/>
+<circle cx="513" cy="695" r="4" fill="#9aa7af"/>
+<circle cx="513" cy="796" r="4" fill="#9aa7af"/>
+<circle cx="513" cy="581" r="3.7" fill="#c17274"/>
+<circle cx="513" cy="599" r="3.7" fill="#586a78"/>
+<text x="536" y="618" font-size="10" fill="#203040">6</text>
+<circle cx="540" cy="631" r="4" fill="#9aa7af"/>
+<circle cx="540" cy="732" r="4" fill="#9aa7af"/>
+<circle cx="540" cy="647" r="4" fill="#9aa7af"/>
+<circle cx="540" cy="748" r="4" fill="#9aa7af"/>
+<circle cx="540" cy="663" r="4" fill="#9aa7af"/>
+<circle cx="540" cy="764" r="4" fill="#9aa7af"/>
+<circle cx="540" cy="679" r="4" fill="#9aa7af"/>
+<circle cx="540" cy="780" r="4" fill="#9aa7af"/>
+<circle cx="540" cy="695" r="4" fill="#9aa7af"/>
+<circle cx="540" cy="796" r="4" fill="#9aa7af"/>
+<circle cx="540" cy="581" r="3.7" fill="#c17274"/>
+<circle cx="540" cy="599" r="3.7" fill="#586a78"/>
+<text x="563" y="618" font-size="10" fill="#203040">7</text>
+<circle cx="567" cy="631" r="4" fill="#9aa7af"/>
+<circle cx="567" cy="732" r="4" fill="#9aa7af"/>
+<circle cx="567" cy="647" r="4" fill="#9aa7af"/>
+<circle cx="567" cy="748" r="4" fill="#9aa7af"/>
+<circle cx="567" cy="663" r="4" fill="#9aa7af"/>
+<circle cx="567" cy="764" r="4" fill="#9aa7af"/>
+<circle cx="567" cy="679" r="4" fill="#9aa7af"/>
+<circle cx="567" cy="780" r="4" fill="#9aa7af"/>
+<circle cx="567" cy="695" r="4" fill="#9aa7af"/>
+<circle cx="567" cy="796" r="4" fill="#9aa7af"/>
+<circle cx="567" cy="581" r="3.7" fill="#c17274"/>
+<circle cx="567" cy="599" r="3.7" fill="#586a78"/>
+<text x="590" y="618" font-size="10" fill="#203040">8</text>
+<circle cx="594" cy="631" r="4" fill="#9aa7af"/>
+<circle cx="594" cy="732" r="4" fill="#9aa7af"/>
+<circle cx="594" cy="647" r="4" fill="#9aa7af"/>
+<circle cx="594" cy="748" r="4" fill="#9aa7af"/>
+<circle cx="594" cy="663" r="4" fill="#9aa7af"/>
+<circle cx="594" cy="764" r="4" fill="#9aa7af"/>
+<circle cx="594" cy="679" r="4" fill="#9aa7af"/>
+<circle cx="594" cy="780" r="4" fill="#9aa7af"/>
+<circle cx="594" cy="695" r="4" fill="#9aa7af"/>
+<circle cx="594" cy="796" r="4" fill="#9aa7af"/>
+<circle cx="594" cy="581" r="3.7" fill="#c17274"/>
+<circle cx="594" cy="599" r="3.7" fill="#586a78"/>
+<text x="617" y="618" font-size="10" fill="#203040">9</text>
+<circle cx="621" cy="631" r="4" fill="#9aa7af"/>
+<circle cx="621" cy="732" r="4" fill="#9aa7af"/>
+<circle cx="621" cy="647" r="4" fill="#9aa7af"/>
+<circle cx="621" cy="748" r="4" fill="#9aa7af"/>
+<circle cx="621" cy="663" r="4" fill="#9aa7af"/>
+<circle cx="621" cy="764" r="4" fill="#9aa7af"/>
+<circle cx="621" cy="679" r="4" fill="#9aa7af"/>
+<circle cx="621" cy="780" r="4" fill="#9aa7af"/>
+<circle cx="621" cy="695" r="4" fill="#9aa7af"/>
+<circle cx="621" cy="796" r="4" fill="#9aa7af"/>
+<circle cx="621" cy="581" r="3.7" fill="#c17274"/>
+<circle cx="621" cy="599" r="3.7" fill="#586a78"/>
+<text x="644" y="618" font-size="10" fill="#203040">10</text>
+<circle cx="648" cy="631" r="4" fill="#9aa7af"/>
+<circle cx="648" cy="732" r="4" fill="#9aa7af"/>
+<circle cx="648" cy="647" r="4" fill="#9aa7af"/>
+<circle cx="648" cy="748" r="4" fill="#9aa7af"/>
+<circle cx="648" cy="663" r="4" fill="#9aa7af"/>
+<circle cx="648" cy="764" r="4" fill="#9aa7af"/>
+<circle cx="648" cy="679" r="4" fill="#9aa7af"/>
+<circle cx="648" cy="780" r="4" fill="#9aa7af"/>
+<circle cx="648" cy="695" r="4" fill="#9aa7af"/>
+<circle cx="648" cy="796" r="4" fill="#9aa7af"/>
+<circle cx="648" cy="581" r="3.7" fill="#c17274"/>
+<circle cx="648" cy="599" r="3.7" fill="#586a78"/>
+<text x="671" y="618" font-size="10" fill="#203040">11</text>
+<circle cx="675" cy="631" r="4" fill="#9aa7af"/>
+<circle cx="675" cy="732" r="4" fill="#9aa7af"/>
+<circle cx="675" cy="647" r="4" fill="#9aa7af"/>
+<circle cx="675" cy="748" r="4" fill="#9aa7af"/>
+<circle cx="675" cy="663" r="4" fill="#9aa7af"/>
+<circle cx="675" cy="764" r="4" fill="#9aa7af"/>
+<circle cx="675" cy="679" r="4" fill="#9aa7af"/>
+<circle cx="675" cy="780" r="4" fill="#9aa7af"/>
+<circle cx="675" cy="695" r="4" fill="#9aa7af"/>
+<circle cx="675" cy="796" r="4" fill="#9aa7af"/>
+<circle cx="675" cy="581" r="3.7" fill="#c17274"/>
+<circle cx="675" cy="599" r="3.7" fill="#586a78"/>
+<text x="698" y="618" font-size="10" fill="#203040">12</text>
+<circle cx="702" cy="631" r="4" fill="#9aa7af"/>
+<circle cx="702" cy="732" r="4" fill="#9aa7af"/>
+<circle cx="702" cy="647" r="4" fill="#9aa7af"/>
+<circle cx="702" cy="748" r="4" fill="#9aa7af"/>
+<circle cx="702" cy="663" r="4" fill="#9aa7af"/>
+<circle cx="702" cy="764" r="4" fill="#9aa7af"/>
+<circle cx="702" cy="679" r="4" fill="#9aa7af"/>
+<circle cx="702" cy="780" r="4" fill="#9aa7af"/>
+<circle cx="702" cy="695" r="4" fill="#9aa7af"/>
+<circle cx="702" cy="796" r="4" fill="#9aa7af"/>
+<circle cx="702" cy="581" r="3.7" fill="#c17274"/>
+<circle cx="702" cy="599" r="3.7" fill="#586a78"/>
+<text x="725" y="618" font-size="10" fill="#203040">13</text>
+<circle cx="729" cy="631" r="4" fill="#9aa7af"/>
+<circle cx="729" cy="732" r="4" fill="#9aa7af"/>
+<circle cx="729" cy="647" r="4" fill="#9aa7af"/>
+<circle cx="729" cy="748" r="4" fill="#9aa7af"/>
+<circle cx="729" cy="663" r="4" fill="#9aa7af"/>
+<circle cx="729" cy="764" r="4" fill="#9aa7af"/>
+<circle cx="729" cy="679" r="4" fill="#9aa7af"/>
+<circle cx="729" cy="780" r="4" fill="#9aa7af"/>
+<circle cx="729" cy="695" r="4" fill="#9aa7af"/>
+<circle cx="729" cy="796" r="4" fill="#9aa7af"/>
+<circle cx="729" cy="581" r="3.7" fill="#c17274"/>
+<circle cx="729" cy="599" r="3.7" fill="#586a78"/>
+<text x="752" y="618" font-size="10" fill="#203040">14</text>
+<circle cx="756" cy="631" r="4" fill="#9aa7af"/>
+<circle cx="756" cy="732" r="4" fill="#9aa7af"/>
+<circle cx="756" cy="647" r="4" fill="#9aa7af"/>
+<circle cx="756" cy="748" r="4" fill="#9aa7af"/>
+<circle cx="756" cy="663" r="4" fill="#9aa7af"/>
+<circle cx="756" cy="764" r="4" fill="#9aa7af"/>
+<circle cx="756" cy="679" r="4" fill="#9aa7af"/>
+<circle cx="756" cy="780" r="4" fill="#9aa7af"/>
+<circle cx="756" cy="695" r="4" fill="#9aa7af"/>
+<circle cx="756" cy="796" r="4" fill="#9aa7af"/>
+<circle cx="756" cy="581" r="3.7" fill="#c17274"/>
+<circle cx="756" cy="599" r="3.7" fill="#586a78"/>
+<text x="779" y="618" font-size="10" fill="#203040">15</text>
+<circle cx="783" cy="631" r="4" fill="#9aa7af"/>
+<circle cx="783" cy="732" r="4" fill="#9aa7af"/>
+<circle cx="783" cy="647" r="4" fill="#9aa7af"/>
+<circle cx="783" cy="748" r="4" fill="#9aa7af"/>
+<circle cx="783" cy="663" r="4" fill="#9aa7af"/>
+<circle cx="783" cy="764" r="4" fill="#9aa7af"/>
+<circle cx="783" cy="679" r="4" fill="#9aa7af"/>
+<circle cx="783" cy="780" r="4" fill="#9aa7af"/>
+<circle cx="783" cy="695" r="4" fill="#9aa7af"/>
+<circle cx="783" cy="796" r="4" fill="#9aa7af"/>
+<circle cx="783" cy="581" r="3.7" fill="#c17274"/>
+<circle cx="783" cy="599" r="3.7" fill="#586a78"/>
+<text x="806" y="618" font-size="10" fill="#203040">16</text>
+<circle cx="810" cy="631" r="4" fill="#9aa7af"/>
+<circle cx="810" cy="732" r="4" fill="#9aa7af"/>
+<circle cx="810" cy="647" r="4" fill="#9aa7af"/>
+<circle cx="810" cy="748" r="4" fill="#9aa7af"/>
+<circle cx="810" cy="663" r="4" fill="#9aa7af"/>
+<circle cx="810" cy="764" r="4" fill="#9aa7af"/>
+<circle cx="810" cy="679" r="4" fill="#9aa7af"/>
+<circle cx="810" cy="780" r="4" fill="#9aa7af"/>
+<circle cx="810" cy="695" r="4" fill="#9aa7af"/>
+<circle cx="810" cy="796" r="4" fill="#9aa7af"/>
+<circle cx="810" cy="581" r="3.7" fill="#c17274"/>
+<circle cx="810" cy="599" r="3.7" fill="#586a78"/>
+<text x="833" y="618" font-size="10" fill="#203040">17</text>
+<circle cx="837" cy="631" r="4" fill="#9aa7af"/>
+<circle cx="837" cy="732" r="4" fill="#9aa7af"/>
+<circle cx="837" cy="647" r="4" fill="#9aa7af"/>
+<circle cx="837" cy="748" r="4" fill="#9aa7af"/>
+<circle cx="837" cy="663" r="4" fill="#9aa7af"/>
+<circle cx="837" cy="764" r="4" fill="#9aa7af"/>
+<circle cx="837" cy="679" r="4" fill="#9aa7af"/>
+<circle cx="837" cy="780" r="4" fill="#9aa7af"/>
+<circle cx="837" cy="695" r="4" fill="#9aa7af"/>
+<circle cx="837" cy="796" r="4" fill="#9aa7af"/>
+<circle cx="837" cy="581" r="3.7" fill="#c17274"/>
+<circle cx="837" cy="599" r="3.7" fill="#586a78"/>
+<text x="860" y="618" font-size="10" fill="#203040">18</text>
+<circle cx="864" cy="631" r="4" fill="#9aa7af"/>
+<circle cx="864" cy="732" r="4" fill="#9aa7af"/>
+<circle cx="864" cy="647" r="4" fill="#9aa7af"/>
+<circle cx="864" cy="748" r="4" fill="#9aa7af"/>
+<circle cx="864" cy="663" r="4" fill="#9aa7af"/>
+<circle cx="864" cy="764" r="4" fill="#9aa7af"/>
+<circle cx="864" cy="679" r="4" fill="#9aa7af"/>
+<circle cx="864" cy="780" r="4" fill="#9aa7af"/>
+<circle cx="864" cy="695" r="4" fill="#9aa7af"/>
+<circle cx="864" cy="796" r="4" fill="#9aa7af"/>
+<circle cx="864" cy="581" r="3.7" fill="#c17274"/>
+<circle cx="864" cy="599" r="3.7" fill="#586a78"/>
+<text x="887" y="618" font-size="10" fill="#203040">19</text>
+<circle cx="891" cy="631" r="4" fill="#9aa7af"/>
+<circle cx="891" cy="732" r="4" fill="#9aa7af"/>
+<circle cx="891" cy="647" r="4" fill="#9aa7af"/>
+<circle cx="891" cy="748" r="4" fill="#9aa7af"/>
+<circle cx="891" cy="663" r="4" fill="#9aa7af"/>
+<circle cx="891" cy="764" r="4" fill="#9aa7af"/>
+<circle cx="891" cy="679" r="4" fill="#9aa7af"/>
+<circle cx="891" cy="780" r="4" fill="#9aa7af"/>
+<circle cx="891" cy="695" r="4" fill="#9aa7af"/>
+<circle cx="891" cy="796" r="4" fill="#9aa7af"/>
+<circle cx="891" cy="581" r="3.7" fill="#c17274"/>
+<circle cx="891" cy="599" r="3.7" fill="#586a78"/>
+<text x="914" y="618" font-size="10" fill="#203040">20</text>
+<circle cx="918" cy="631" r="4" fill="#9aa7af"/>
+<circle cx="918" cy="732" r="4" fill="#9aa7af"/>
+<circle cx="918" cy="647" r="4" fill="#9aa7af"/>
+<circle cx="918" cy="748" r="4" fill="#9aa7af"/>
+<circle cx="918" cy="663" r="4" fill="#9aa7af"/>
+<circle cx="918" cy="764" r="4" fill="#9aa7af"/>
+<circle cx="918" cy="679" r="4" fill="#9aa7af"/>
+<circle cx="918" cy="780" r="4" fill="#9aa7af"/>
+<circle cx="918" cy="695" r="4" fill="#9aa7af"/>
+<circle cx="918" cy="796" r="4" fill="#9aa7af"/>
+<circle cx="918" cy="581" r="3.7" fill="#c17274"/>
+<circle cx="918" cy="599" r="3.7" fill="#586a78"/>
+<text x="383" y="635" font-size="13" fill="#203040">a</text>
+<text x="383" y="736" font-size="13" fill="#203040">f</text>
+<text x="383" y="651" font-size="13" fill="#203040">b</text>
+<text x="383" y="752" font-size="13" fill="#203040">g</text>
+<text x="383" y="667" font-size="13" fill="#203040">c</text>
+<text x="383" y="768" font-size="13" fill="#203040">h</text>
+<text x="383" y="683" font-size="13" fill="#203040">d</text>
+<text x="383" y="784" font-size="13" fill="#203040">i</text>
+<text x="383" y="699" font-size="13" fill="#203040">e</text>
+<text x="383" y="800" font-size="13" fill="#203040">j</text>
+<text x="390" y="570" font-size="18" fill="#203040">Breadboard: top a–e strips</text>
+<polyline points="265,675 325,675 325,631 432,631" stroke="#8b4bb0" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="432" y="638" width="108" height="18" rx="4" fill="#dfc39b" stroke="#8f6c42" stroke-width="2"/>
+<text x="454" y="653" font-size="15" fill="#203040">2.2 kΩ</text>
+<rect x="540" y="670" width="108" height="18" rx="4" fill="#dfc39b" stroke="#8f6c42" stroke-width="2"/>
+<text x="562" y="685" font-size="15" fill="#203040">10 kΩ</text>
+<polyline points="648,631 648,599" stroke="#273746" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="265,745 305,745 305,599 405,599" stroke="#273746" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="527" y="707" width="92" height="54" rx="8" fill="#2e343b" stroke="#283039" stroke-width="2"/>
+<text x="538" y="729" font-size="19" fill="white">NPN</text>
+<text x="542" y="751" font-size="15" fill="white">B C E</text>
+<polyline points="540,695 540,707" stroke="#8b4bb0" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="567,695 567,707" stroke="#1768bb" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="594,695 594,707" stroke="#263442" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="594,631 594,599" stroke="#263442" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="1085" y="505" width="380" height="340" rx="8" fill="#e0efff" stroke="#536575" stroke-width="2"/>
+<text x="1100" y="542" font-size="22" fill="#203040">5V LOW-trigger relay</text>
+<text x="1105" y="590" font-size="20" fill="#203040">IN</text>
+<text x="1105" y="655" font-size="20" fill="#203040">GND</text>
+<text x="1105" y="720" font-size="20" fill="#203040">VCC</text>
+<polyline points="567,631 567,550 970,550 970,585 1085,585" stroke="#1768bb" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="918,599 1020,599 1020,650 1085,650" stroke="#273746" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="918,581 1050,581 1050,715 1085,715" stroke="#d72c35" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="1095" y="781" font-size="18" fill="#203040">5V regulated logic supply</text>
+<polyline points="405,581 365,581 365,505 405,505" stroke="#d72c35" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="415" y="511" font-size="16" fill="#203040">Separate 5V + → rail (+)</text>
+<polyline points="405,599 352,599 352,530 405,530" stroke="#273746" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="415" y="536" font-size="16" fill="#203040">5V − → common GND (−)</text>
+<text x="35" y="925" font-size="18" fill="#b42318">The actual 2N2222 pin order varies. Identify B/C/E before inserting; do not use this drawing as pin-order evidence.</text>
+<text x="35" y="960" font-size="17" fill="#b42318">First test relay only, then attach pump supply with power OFF. The motor current must not pass through breadboard.</text>
+</g>
+</svg>
