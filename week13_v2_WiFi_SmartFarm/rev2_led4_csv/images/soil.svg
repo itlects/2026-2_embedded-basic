@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1050" height="410">
+<rect width="100%" height="100%" fill="#edf1f5"/>
+<g font-family="Arial" font-size="20" fill="#1b2938">
+<text x="30" y="40" font-size="28">Soil sensor • AO to GPIO34</text>
+<rect x="40" y="80" width="220" height="270" rx="12" fill="#21535a"/>
+<rect x="85" y="100" width="130" height="80" fill="#aab7c2"/>
+<text x="90" y="131" fill="#fff">ESP32</text>
+<text x="160" y="220" fill="white">3V3</text>
+<text x="160" y="260" fill="white">GND</text>
+<text x="160" y="300" fill="white">34</text>
+<rect x="650" y="100" width="210" height="245" rx="12" fill="#1b6096"/>
+<text x="675" y="135" fill="white">Comparator</text>
+<circle cx="760" cy="170" r="28" fill="#a7cbd6"/>
+<text x="670" y="220" fill="white">VCC</text>
+<text x="670" y="260" fill="white">GND</text>
+<text x="670" y="300" fill="white">AO</text>
+<path d="M260 215 H650" stroke="#e53935" stroke-width="6"/>
+<path d="M260 255 H650" stroke="#263442" stroke-width="6"/>
+<path d="M260 295 H650" stroke="#de8c10" stroke-width="6"/>
+<path d="M860 155 H900 V225 M860 185 H940 V225" stroke="#263442" stroke-width="4" fill="none"/>
+<path d="M885 225 V350 H902 V225 M930 225 V350 H947 V225" stroke="#b5a548" stroke-width="10" fill="none"/>
+<text x="880" y="390">Probe</text>
+<text x="40" y="390" fill="#b42318">3.3V compatible module only; verify AO voltage. DO unused.</text>
+</g>
+</svg>
