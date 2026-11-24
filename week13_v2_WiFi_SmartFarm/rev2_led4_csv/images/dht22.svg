@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1050" height="410">
+<rect width="100%" height="100%" fill="#edf1f5"/>
+<g font-family="Arial" font-size="20" fill="#1b2938">
+<text x="30" y="40" font-size="28">DHT22 • 3.3V digital signal</text>
+<rect x="40" y="80" width="220" height="270" rx="12" fill="#21535a"/>
+<rect x="85" y="100" width="130" height="80" fill="#aab7c2"/>
+<text x="90" y="131" fill="#fff">ESP32</text>
+<text x="160" y="220" fill="white">3V3</text>
+<text x="160" y="260" fill="white">16</text>
+<text x="160" y="300" fill="white">GND</text>
+<rect x="700" y="105" width="220" height="230" rx="14" fill="#f8fafb" stroke="#8b9aa5" stroke-width="3"/>
+<text x="735" y="150">DHT22</text>
+<text x="715" y="220">VCC</text>
+<text x="715" y="260">DATA</text>
+<text x="715" y="300">GND</text>
+<path d="M260 215 H700" stroke="#e53935" stroke-width="6"/>
+<path d="M260 255 H700" stroke="#169d63" stroke-width="6"/>
+<path d="M260 295 H700" stroke="#263442" stroke-width="6"/>
+<path d="M495 215 V228 M495 243 V255" stroke="#263442" stroke-width="3"/>
+<rect x="485" y="228" width="20" height="15" fill="#e6d1a5" stroke="#665"/>
+<text x="510" y="240" font-size="16">10kΩ</text>
+<text x="40" y="390" fill="#b42318">Bare DHT22: NC unused. Confirm actual module labels.</text>
+</g>
+</svg>
