@@ -1,8 +1,8 @@
 # 13주차 v2 스마트팜 자료
 
-**최신 실습: [rev2_led4_csv](rev2_led4_csv/README.md)** — ESP32 DevKitC V4·LED4·버튼4·DHT22·Python CSV 웹서버, 통합 스마트팜. 2026-11-25 개정.
+**최신 실습: [rev3](rev3/README.md)** — 예제 1 토양센서 · 예제 2 릴레이/펌프 · 예제 3 DHT22 · 예제 4 ESP32 웹서버+CSV(LittleFS) · 워크북 스마트팜 통합. 2026-11-25 최종.
 
-아래 기존 LED5/AP 자료는 구판입니다. 이번 수업은 rev2_led4_csv 폴더만 사용하세요.
+rev2_led4_csv(PC Python 서버) 및 아래 LED5/AP 자료는 이전 판입니다. 이번 수업은 rev3 폴더만 사용하세요.
 
 ---
 
