@@ -13,38 +13,39 @@
     {
       "type": "wokwi-relay-module",
       "id": "relay",
-      "top": 10,
-      "left": 180,
+      "top": 20,
+      "left": 170,
       "attrs": {}
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "rp",
+      "top": 120,
+      "left": 300,
+      "rotate": 90,
+      "attrs": {
+        "value": "220"
+      }
     },
     {
       "type": "wokwi-led",
       "id": "pump",
-      "top": 120,
-      "left": 340,
+      "top": 170,
+      "left": 305,
       "attrs": {
         "color": "blue",
         "label": "PUMP"
       }
     },
     {
-      "type": "wokwi-resistor",
-      "id": "rp",
-      "top": 100,
-      "left": 260,
-      "rotate": 0,
-      "attrs": {
-        "value": "220"
-      }
-    },
-    {
       "type": "wokwi-pushbutton",
       "id": "btn1",
-      "top": 60,
-      "left": -140,
+      "top": 70,
+      "left": -110,
       "attrs": {
         "color": "green",
-        "label": "BTN1"
+        "label": "BTN1",
+        "bounce": "0"
       }
     }
   ],
@@ -66,9 +67,10 @@
       "esp:5V",
       "red",
       [
-        "h-20",
+        "h-30",
+        "v190",
         "*",
-        "h-20"
+        "h-10"
       ]
     ],
     [
@@ -76,7 +78,7 @@
       "esp:GND.2",
       "black",
       [
-        "h-30",
+        "h-20",
         "*",
         "h10"
       ]
@@ -96,36 +98,37 @@
       "esp:5V",
       "red",
       [
-        "h20",
+        "h15",
         "v200",
         "*",
-        "h-20"
+        "h-10"
       ]
     ],
     [
       "relay:NO",
-      "rp:2",
+      "rp:1",
       "blue",
       [
-        "h30",
+        "h28",
         "*",
-        "h10"
+        "v-10"
       ]
     ],
     [
-      "rp:1",
+      "rp:2",
       "pump:A",
       "blue",
       []
     ],
     [
       "pump:C",
-      "esp:GND.1",
+      "esp:GND.3",
       "black",
       [
-        "v40",
+        "v20",
+        "h-120",
         "*",
-        "h-30"
+        "h20"
       ]
     ],
     [
@@ -135,17 +138,18 @@
       [
         "h20",
         "*",
-        "h-20"
+        "h-8"
       ]
     ],
     [
-      "btn1:1.r",
+      "btn1:1.l",
       "esp:GND.1",
       "black",
       [
-        "h10",
+        "h-10",
+        "v80",
         "*",
-        "h-10"
+        "h-16"
       ]
     ]
   ],
