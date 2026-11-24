@@ -16,7 +16,7 @@ const char* AP_SSID   = "SmartFarm-team01";   // 공유기 연결 실패 시 ESP
 const char* AP_PASS   = "12345678";           // 8자 이상
 
 const int DHT_PIN = 19;
-const int LED_PINS[4] = {4, 13, 14, 18};
+const int LED_PINS[4] = {13, 14, 4, 18};
 const int BTN_PINS[4] = {32, 33, 25, 26};
 
 const char* CSV_PATH = "/data.csv";
