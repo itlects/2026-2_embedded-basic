@@ -1,0 +1,153 @@
+{
+  "version": 1,
+  "author": "Embedded Processor Week13",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "board-esp32-devkit-c-v4",
+      "id": "esp",
+      "top": 0,
+      "left": 0,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-relay-module",
+      "id": "relay",
+      "top": 10,
+      "left": 180,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-led",
+      "id": "pump",
+      "top": 120,
+      "left": 340,
+      "attrs": {
+        "color": "blue",
+        "label": "PUMP"
+      }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "rp",
+      "top": 100,
+      "left": 260,
+      "rotate": 0,
+      "attrs": {
+        "value": "220"
+      }
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btn1",
+      "top": 60,
+      "left": -140,
+      "attrs": {
+        "color": "green",
+        "label": "BTN1"
+      }
+    }
+  ],
+  "connections": [
+    [
+      "esp:TX",
+      "$serialMonitor:RX",
+      "",
+      []
+    ],
+    [
+      "esp:RX",
+      "$serialMonitor:TX",
+      "",
+      []
+    ],
+    [
+      "relay:VCC",
+      "esp:5V",
+      "red",
+      [
+        "h-20",
+        "*",
+        "h-20"
+      ]
+    ],
+    [
+      "relay:GND",
+      "esp:GND.2",
+      "black",
+      [
+        "h-30",
+        "*",
+        "h10"
+      ]
+    ],
+    [
+      "relay:IN",
+      "esp:23",
+      "purple",
+      [
+        "h-40",
+        "*",
+        "h20"
+      ]
+    ],
+    [
+      "relay:COM",
+      "esp:5V",
+      "red",
+      [
+        "h20",
+        "v200",
+        "*",
+        "h-20"
+      ]
+    ],
+    [
+      "relay:NO",
+      "rp:2",
+      "blue",
+      [
+        "h30",
+        "*",
+        "h10"
+      ]
+    ],
+    [
+      "rp:1",
+      "pump:A",
+      "blue",
+      []
+    ],
+    [
+      "pump:C",
+      "esp:GND.1",
+      "black",
+      [
+        "v40",
+        "*",
+        "h-30"
+      ]
+    ],
+    [
+      "btn1:2.r",
+      "esp:32",
+      "green",
+      [
+        "h20",
+        "*",
+        "h-20"
+      ]
+    ],
+    [
+      "btn1:1.r",
+      "esp:GND.1",
+      "black",
+      [
+        "h10",
+        "*",
+        "h-10"
+      ]
+    ]
+  ],
+  "dependencies": {}
+}

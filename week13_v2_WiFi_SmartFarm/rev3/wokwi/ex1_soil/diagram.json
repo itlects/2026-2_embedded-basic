@@ -1,0 +1,110 @@
+{
+  "version": 1,
+  "author": "Embedded Processor Week13",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "board-esp32-devkit-c-v4",
+      "id": "esp",
+      "top": 0,
+      "left": 0,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-potentiometer",
+      "id": "soil",
+      "top": 20,
+      "left": -170,
+      "attrs": {
+        "value": "3500"
+      }
+    },
+    {
+      "type": "wokwi-slide-switch",
+      "id": "do",
+      "top": 110,
+      "left": -150,
+      "attrs": {}
+    }
+  ],
+  "connections": [
+    [
+      "esp:TX",
+      "$serialMonitor:RX",
+      "",
+      []
+    ],
+    [
+      "esp:RX",
+      "$serialMonitor:TX",
+      "",
+      []
+    ],
+    [
+      "soil:VCC",
+      "esp:3V3",
+      "red",
+      [
+        "v10",
+        "h40",
+        "*",
+        "h-10"
+      ]
+    ],
+    [
+      "soil:SIG",
+      "esp:34",
+      "orange",
+      [
+        "v20",
+        "h40",
+        "*",
+        "h-10"
+      ]
+    ],
+    [
+      "soil:GND",
+      "esp:GND.1",
+      "black",
+      [
+        "v30",
+        "h30",
+        "*",
+        "h-10"
+      ]
+    ],
+    [
+      "do:2",
+      "esp:35",
+      "green",
+      [
+        "v20",
+        "h50",
+        "*",
+        "h-10"
+      ]
+    ],
+    [
+      "do:1",
+      "esp:GND.1",
+      "black",
+      [
+        "v30",
+        "*",
+        "h-20"
+      ]
+    ],
+    [
+      "do:3",
+      "esp:3V3",
+      "red",
+      [
+        "v10",
+        "h20",
+        "*",
+        "h-20"
+      ]
+    ]
+  ],
+  "dependencies": {}
+}
