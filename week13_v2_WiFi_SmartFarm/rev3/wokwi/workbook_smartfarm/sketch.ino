@@ -27,7 +27,7 @@ const unsigned long PUMP_REST_MS = 20000;   // 급수 후 20초 동안 재급수
 // ================= 2. 핀 =================
 const int SOIL_AO = 34, SOIL_DO = 35, DHT_PIN = 19;
 const int RELAY_PIN = 23, BUZZ_PIN = 27;
-const int LED_PINS[4] = {13, 14, 4, 18};    // LED1 Wi-Fi, LED2 건조, LED3 펌프, LED4 AUTO
+const int LED_PINS[4] = {14, 13, 4, 18};    // LED1 Wi-Fi, LED2 건조, LED3 펌프, LED4 AUTO
 const int BTN_PINS[4] = {32, 33, 25, 26};   // BTN1 AUTO, BTN2 급수, BTN3 정지, BTN4 임계값
 const int RELAY_OFF = (RELAY_ON == HIGH) ? LOW : HIGH;
 
