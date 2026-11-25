@@ -13,8 +13,8 @@
     {
       "type": "wokwi-dht22",
       "id": "dht",
-      "top": -120,
-      "left": 300,
+      "top": -150,
+      "left": 560,
       "attrs": {
         "temperature": "24.5",
         "humidity": "55"
@@ -165,8 +165,8 @@
     {
       "type": "wokwi-lcd1602",
       "id": "lcd",
-      "top": -140,
-      "left": -20,
+      "top": -170,
+      "left": 220,
       "attrs": {
         "pins": "i2c"
       }
@@ -174,15 +174,15 @@
     {
       "type": "wokwi-relay-module",
       "id": "relay",
-      "top": 10,
-      "left": 240,
+      "top": 40,
+      "left": 260,
       "attrs": {}
     },
     {
       "type": "wokwi-resistor",
       "id": "rp",
-      "top": 80,
-      "left": 370,
+      "top": 120,
+      "left": 400,
       "rotate": 90,
       "attrs": {
         "value": "220"
@@ -191,8 +191,8 @@
     {
       "type": "wokwi-led",
       "id": "pump",
-      "top": 130,
-      "left": 375,
+      "top": 170,
+      "left": 405,
       "attrs": {
         "color": "blue",
         "label": "PUMP(motor)"
@@ -201,8 +201,8 @@
     {
       "type": "wokwi-buzzer",
       "id": "bz",
-      "top": 120,
-      "left": 160,
+      "top": 110,
+      "left": 180,
       "attrs": {
         "volume": "0.1"
       }
@@ -226,7 +226,7 @@
       "esp:3V3",
       "red",
       [
-        "v7",
+        "v6",
         "*",
         "h-17"
       ]
@@ -236,9 +236,9 @@
       "esp:19",
       "green",
       [
-        "v10",
+        "v14",
         "*",
-        "h20"
+        "h28"
       ]
     ],
     [
@@ -246,9 +246,9 @@
       "esp:GND.2",
       "black",
       [
-        "v4",
+        "v10",
         "*",
-        "h12"
+        "h20"
       ]
     ],
     [
@@ -508,55 +508,93 @@
       "lcd:GND",
       "esp:GND.2",
       "black",
-      []
+      [
+        "h-14",
+        "*",
+        "h8"
+      ]
     ],
     [
       "lcd:VCC",
       "esp:5V",
       "red",
-      []
+      [
+        "h-150",
+        "*",
+        "h-30"
+      ]
     ],
     [
       "lcd:SDA",
       "esp:21",
       "green",
-      []
+      [
+        "h-22",
+        "*",
+        "h16"
+      ]
     ],
     [
       "lcd:SCL",
       "esp:22",
       "purple",
-      []
+      [
+        "h-30",
+        "*",
+        "h24"
+      ]
     ],
     [
       "relay:VCC",
       "esp:5V",
       "red",
-      []
+      [
+        "h-12",
+        "v175",
+        "*",
+        "h-30"
+      ]
     ],
     [
       "relay:GND",
-      "esp:GND.2",
+      "esp:GND.3",
       "black",
-      []
+      [
+        "h-40",
+        "*",
+        "h12"
+      ]
     ],
     [
       "relay:IN",
       "esp:23",
       "purple",
-      []
+      [
+        "h-60",
+        "*",
+        "h32"
+      ]
     ],
     [
       "relay:COM",
-      "esp:5V",
+      "relay:VCC",
       "red",
-      []
+      [
+        "h12",
+        "v-30",
+        "h-120",
+        "v30"
+      ]
     ],
     [
       "relay:NO",
       "rp:1",
       "blue",
-      []
+      [
+        "h28",
+        "*",
+        "v-10"
+      ]
     ],
     [
       "rp:2",
@@ -568,19 +606,32 @@
       "pump:C",
       "esp:GND.3",
       "black",
-      []
+      [
+        "v20",
+        "h-120",
+        "*",
+        "h20"
+      ]
     ],
     [
       "bz:2",
       "esp:27",
       "orange",
-      []
+      [
+        "v20",
+        "*",
+        "h-40"
+      ]
     ],
     [
       "bz:1",
       "esp:GND.1",
       "black",
-      []
+      [
+        "v28",
+        "*",
+        "h-30"
+      ]
     ]
   ],
   "dependencies": {}
